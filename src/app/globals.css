@@ -1,0 +1,26 @@
+@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --branco: #FFFFFF;
+  --roxo-medio: #5D286C;
+  --roxo-vivo: #7B1470;
+  --ameixa-escuro: #44213F;
+  --grafite: #262626;
+}
+
+body {
+  background-color: var(--branco);
+  color: var(--grafite);
+  font-family: sans-serif;
+}
+
+/* Forçamos a remoção de qualquer modo escuro automático */
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: var(--branco);
+    color: var(--grafite);
+  }
+}

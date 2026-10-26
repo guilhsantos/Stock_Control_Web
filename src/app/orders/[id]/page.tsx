@@ -1,0 +1,360 @@
+"use client";
+
+import { Suspense, useEffect, useMemo, useState } from "react";
+import { useParams, useRouter, useSearchParams } from "next/navigation";
+import { supabase } from "@/lib/supabase";
+import { Loader2, ArrowLeft, Package, User, Calendar, Star, X, Maximize2, ChevronLeft, ChevronRight } from "lucide-react";
+import Link from "next/link";
+import { formatDate } from "@/lib/date-utils";
+import { useStuckLoadingRecovery } from "@/lib/use-stuck-loading-recovery";
+import {
+  getDisplayReservedQty,
+  getRemainingQty,
+  orderHasActiveReservations,
+  sortItemsByReservation,
+} from "@/lib/order-reservations";
+
+const RETURN_STATUSES = ["Pendente", "Concluído", "Entregue"] as const;
+
+function OrderDetailsInner() {
+  const params = useParams();
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const orderId = Array.isArray(params.id) ? params.id[0] : (params.id as string);
+
+  const returnUrl = searchParams.get("returnUrl");
+  const returnStatus = searchParams.get("returnStatus");
+
+  // Só caminhos internos: "//site.com" e "/\site.com" levariam para fora do app
+  const safeReturnUrl =
+    returnUrl && /^\/(?![/\\])/.test(returnUrl) ? returnUrl : null;
+  const listHref = safeReturnUrl
+    ? safeReturnUrl
+    : returnStatus && RETURN_STATUSES.includes(returnStatus as (typeof RETURN_STATUSES)[number])
+    ? `/orders/list?status=${encodeURIComponent(returnStatus)}`
+    : "/orders/list";
+
+  const [order, setOrder] = useState<any | null>(null);
+  const [loading, setLoading] = useState(true);
+  // Índice da foto aberta em tela cheia (null = fechado)
+  const [openPhoto, setOpenPhoto] = useState<number | null>(null);
+
+  useStuckLoadingRecovery(loading);
+
+  const sortedItems = useMemo(
+    () => sortItemsByReservation(order?.order_items ?? []),
+    [order]
+  );
+
+  useEffect(() => {
+    if (!orderId) return;
+    fetchOrder();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [orderId]);
+
+  async function fetchOrder() {
+    setLoading(true);
+    const { data, error } = await supabase
+      .from("orders")
+      .select(
+        "*, order_photos(id, url, position), order_items(id, quantidade, kit_id, qty_reserved_total, order_item_reservations(id, qty_reserved, status), kits(nome_kit, codigo_unico))"
+      )
+      .eq("id", orderId)
+      .single();
+
+    if (error) {
+      console.error("Erro ao carregar pedido:", error);
+      setOrder(null);
+    } else {
+      setOrder(data);
+    }
+    setLoading(false);
+  }
+
+  function goBack() {
+    router.push(listHref);
+  }
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <Loader2 className="animate-spin text-[#5D286C]" size={40} />
+      </div>
+    );
+  }
+
+  if (!order) {
+    return (
+      <div className="max-w-3xl mx-auto p-4 space-y-4">
+        <button
+          type="button"
+          onClick={goBack}
+          className="inline-flex items-center gap-2 text-sm font-bold text-gray-500 hover:text-[#5D286C]"
+        >
+          <ArrowLeft size={18} /> Voltar
+        </button>
+        <p className="text-center text-gray-400 font-bold mt-10">Pedido não encontrado.</p>
+      </div>
+    );
+  }
+
+  // Todas as fotos da baixa; pedidos antigos só têm a capa em photo_url
+  const photoUrls: string[] =
+    order.order_photos?.length > 0
+      ? [...order.order_photos].sort((a: any, b: any) => a.position - b.position).map((p: any) => p.url)
+      : order.photo_url
+        ? [order.photo_url]
+        : [];
+  const hasPhoto = photoUrls.length > 0;
+  const hasReservation = orderHasActiveReservations(order.order_items || []);
+
+  return (
+    <div className="max-w-4xl mx-auto p-4 space-y-6">
+      <div className="flex items-center gap-4">
+        <button
+          type="button"
+          onClick={goBack}
+          className="p-3 bg-white border border-gray-100 rounded-2xl text-gray-400 hover:text-[#5D286C] shadow-sm transition-all"
+        >
+          <ArrowLeft size={20} />
+        </button>
+        <div>
+          <h1 className="text-2xl md:text-3xl font-black text-[#262626] flex items-center gap-2">Detalhes do Pedido</h1>
+          <p className="text-xs font-black text-gray-400 uppercase tracking-[0.2em]">#{order.codigo_unico}</p>
+        </div>
+      </div>
+
+      <div className="grid gap-6 md:grid-cols-[2fr,1.5fr]">
+        <div className="space-y-4">
+          <div className="bg-white p-6 rounded-[2rem] border border-gray-100 shadow-sm space-y-3">
+            <div className="flex flex-wrap items-center gap-2">
+              <span className="text-xs font-black px-3 py-1 rounded-full bg-gray-100 text-gray-600 uppercase">{order.status}</span>
+              {order.is_priority && (
+                <span className="text-[10px] font-black px-2 py-1 rounded-full bg-red-100 text-red-600 uppercase flex items-center gap-1">
+                  <Star size={12} /> Prioritário
+                </span>
+              )}
+              {hasReservation && (
+                <span className="text-[10px] font-black px-2 py-1 rounded-full bg-amber-100 text-amber-700 uppercase">
+                  Reserva ativa
+                </span>
+              )}
+            </div>
+            <p className="flex items-center gap-2 text-sm font-bold text-gray-700">
+              <User size={16} className="text-gray-400" /> {order.cliente}
+            </p>
+            <p className="flex items-center gap-2 text-sm font-bold text-gray-500">
+              <Calendar size={16} className="text-gray-400" />
+              {order.data_entrega ? formatDate(order.data_entrega) : "Sem data definida"}
+            </p>
+            {order.invoice_number && (
+              <p className="text-xs font-bold text-gray-500">
+                NF: <span className="text-gray-800">{order.invoice_number}</span>
+                {order.faturado_em && (
+                  <>
+                    {" · "}Faturado em <span className="text-gray-800">{formatDate(order.faturado_em)}</span>
+                  </>
+                )}
+              </p>
+            )}
+            {order.notes && (
+              <div className="mt-2">
+                <p className="text-[10px] font-black text-gray-400 uppercase mb-1">Observações</p>
+                <p className="text-sm text-gray-700 whitespace-pre-line">{order.notes}</p>
+              </div>
+            )}
+          </div>
+
+          <div className="bg-white p-6 rounded-[2rem] border border-gray-100 shadow-sm">
+            <h2 className="text-sm font-black text-[#262626] mb-4 flex items-center gap-2 uppercase tracking-widest">
+              <Package size={16} className="text-[#5D286C]" /> Itens do Pedido
+            </h2>
+            <div className="space-y-3">
+              {sortedItems.map((item: any, idx: number) => {
+                // Pedido concluído/entregue: o estoque já foi baixado, não há reserva nem falta
+                const baixado = order.status !== "Pendente";
+                const reserved = baixado ? 0 : getDisplayReservedQty(item);
+                const missing = baixado ? 0 : getRemainingQty(item);
+                const fullyReserved = reserved > 0 && missing === 0;
+                const partiallyReserved = reserved > 0 && missing > 0;
+                return (
+                <div
+                  key={item.id ?? idx}
+                  className={`flex justify-between items-start rounded-2xl px-4 py-3 gap-3 border ${
+                    fullyReserved
+                      ? "bg-amber-50 border-amber-200"
+                      : partiallyReserved
+                        ? "bg-amber-50/50 border-amber-100"
+                        : "bg-gray-50 border-transparent"
+                  }`}
+                >
+                  <div className="flex flex-col min-w-0 flex-1">
+                    <div className="flex flex-wrap items-center gap-2">
+                      <span className="text-xs font-black text-gray-700">
+                        {item.kits?.codigo_unico} - {item.kits?.nome_kit}
+                      </span>
+                      {fullyReserved && (
+                        <span className="text-[9px] font-black uppercase px-2 py-0.5 rounded-full bg-amber-200 text-amber-800">
+                          Reservado
+                        </span>
+                      )}
+                      {partiallyReserved && (
+                        <span className="text-[9px] font-black uppercase px-2 py-0.5 rounded-full bg-amber-100 text-amber-700">
+                          Parcial
+                        </span>
+                      )}
+                    </div>
+                    <span className="text-[10px] font-bold text-gray-500 mt-1.5 flex flex-wrap gap-x-2 gap-y-0.5">
+                      <span>Pedido: {item.quantidade}</span>
+                      {baixado ? (
+                        <span className="text-green-600 font-black">Baixado: {item.quantidade}</span>
+                      ) : (
+                        <>
+                          <span className={reserved > 0 ? "text-amber-700 font-black" : ""}>
+                            Reservado: {reserved}
+                          </span>
+                          <span className={missing > 0 ? "text-red-600 font-black" : "text-green-600"}>
+                            Faltante: {missing}
+                          </span>
+                        </>
+                      )}
+                    </span>
+                  </div>
+                  <span
+                    className={`text-xs font-black shrink-0 ${
+                      reserved > 0 ? "text-amber-700" : "text-[#5D286C]"
+                    }`}
+                  >
+                    {item.quantidade} un.
+                  </span>
+                </div>
+              );
+              })}
+              {(!order.order_items || order.order_items.length === 0) && (
+                <p className="text-center text-gray-400 text-sm font-bold">Nenhum item encontrado para este pedido.</p>
+              )}
+            </div>
+          </div>
+        </div>
+
+        <div className="space-y-4">
+          <div className="bg-white p-6 rounded-[2rem] border border-gray-100 shadow-sm">
+            <h2 className="text-sm font-black text-[#262626] mb-3 uppercase tracking-widest">
+              {photoUrls.length > 1 ? `Fotos do Pedido (${photoUrls.length})` : "Foto do Pedido"}
+            </h2>
+            {hasPhoto ? (
+              <div className="space-y-2">
+                <button
+                  type="button"
+                  className="relative w-full overflow-hidden rounded-2xl border border-gray-100 bg-gray-50 group cursor-pointer block"
+                  onClick={() => setOpenPhoto(0)}
+                >
+                  <img
+                    src={photoUrls[0]}
+                    alt={`Foto do pedido ${order.codigo_unico}`}
+                    className="w-full h-64 object-cover transition-transform group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all flex items-center justify-center">
+                    <Maximize2 className="text-white opacity-0 group-hover:opacity-100 transition-opacity" size={32} />
+                  </div>
+                </button>
+                {photoUrls.length > 1 && (
+                  <div className="flex gap-2 overflow-x-auto pb-1">
+                    {photoUrls.slice(1).map((url, i) => (
+                      <button
+                        key={url}
+                        type="button"
+                        onClick={() => setOpenPhoto(i + 1)}
+                        className="shrink-0 w-20 h-20 rounded-xl overflow-hidden border border-gray-100 bg-gray-50"
+                      >
+                        <img src={url} alt={`Foto ${i + 2} do pedido`} className="w-full h-full object-cover" />
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </div>
+            ) : (
+              <div className="h-64 rounded-2xl border border-dashed border-gray-200 flex items-center justify-center text-xs text-gray-400 font-bold bg-gray-50">
+                Nenhuma foto disponível para este pedido.
+              </div>
+            )}
+          </div>
+
+          <Link href={listHref} className="block text-center text-xs font-black text-gray-500 hover:text-[#5D286C]">
+            Ver todos os pedidos
+          </Link>
+        </div>
+      </div>
+
+      {openPhoto !== null && hasPhoto && (
+        <div
+          className="fixed inset-0 z-[120] bg-black/90 backdrop-blur-sm flex items-center justify-center p-4 animate-in fade-in duration-200"
+          onClick={() => setOpenPhoto(null)}
+        >
+          <div className="relative max-w-7xl max-h-[90vh] w-full h-full flex items-center justify-center">
+            <button
+              type="button"
+              onClick={(e) => {
+                e.stopPropagation();
+                setOpenPhoto(null);
+              }}
+              aria-label="Fechar"
+              className="absolute top-4 right-4 z-10 bg-white/90 hover:bg-white text-gray-800 rounded-full p-3 shadow-lg transition-all"
+            >
+              <X size={24} />
+            </button>
+            {photoUrls.length > 1 && (
+              <>
+                <button
+                  type="button"
+                  aria-label="Foto anterior"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setOpenPhoto((openPhoto - 1 + photoUrls.length) % photoUrls.length);
+                  }}
+                  className="absolute left-2 z-10 bg-white/90 hover:bg-white text-gray-800 rounded-full p-3 shadow-lg"
+                >
+                  <ChevronLeft size={24} />
+                </button>
+                <button
+                  type="button"
+                  aria-label="Próxima foto"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setOpenPhoto((openPhoto + 1) % photoUrls.length);
+                  }}
+                  className="absolute right-2 z-10 bg-white/90 hover:bg-white text-gray-800 rounded-full p-3 shadow-lg"
+                >
+                  <ChevronRight size={24} />
+                </button>
+                <span className="absolute bottom-2 left-1/2 -translate-x-1/2 z-10 bg-black/60 text-white text-xs font-black px-3 py-1 rounded-full">
+                  {openPhoto + 1} / {photoUrls.length}
+                </span>
+              </>
+            )}
+            <img
+              src={photoUrls[openPhoto]}
+              alt={`Foto ${openPhoto + 1} do pedido ${order.codigo_unico}`}
+              className="max-w-full max-h-full object-contain rounded-lg"
+              onClick={(e) => e.stopPropagation()}
+            />
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+export default function OrderDetailsPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="min-h-screen flex items-center justify-center">
+          <Loader2 className="animate-spin text-[#5D286C]" size={40} />
+        </div>
+      }
+    >
+      <OrderDetailsInner />
+    </Suspense>
+  );
+}

@@ -1,0 +1,241 @@
+"use client";
+
+import { useState, useEffect } from "react";
+import { useAuth } from "@/lib/auth-context";
+import { supabase } from "@/lib/supabase";
+import { clearClientStorageAndGoLogin } from "@/lib/session-recovery";
+import { 
+  LayoutDashboard, QrCode, Settings, LogOut, 
+  User, ChevronLeft, ChevronRight, ShoppingCart,
+  ChevronDown, Package, Cpu, Box, Users, PlusCircle, List,
+  TrendingUp, Eye, Warehouse
+} from "lucide-react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import Image from "next/image";
+
+interface SidebarProps {
+  onCloseMobile?: () => void;
+}
+
+function roleDisplayLabel(role: string): string {
+  if (role === "ADMIN") return "Administrador";
+  if (role === "OP_ESTOQUE") return "Operador";
+  return role;
+}
+
+export default function Sidebar({ onCloseMobile }: SidebarProps) {
+  const { user, role: contextRole } = useAuth();
+  const pathname = usePathname();
+  const [isCollapsed, setIsCollapsed] = useState(false);
+  const [openSubmenu, setOpenSubmenu] = useState<string | null>(null);
+  const [isLoggingOut, setIsLoggingOut] = useState(false);
+  const [currentRole, setCurrentRole] = useState<string | null>(contextRole);
+
+  // Sincronizar role do contexto
+  useEffect(() => {
+    if (contextRole) {
+      setCurrentRole(contextRole);
+    }
+  }, [contextRole]);
+
+  // Re-verificar role periodicamente para garantir que está atualizado
+  useEffect(() => {
+    if (!user) return;
+
+    const checkRole = async () => {
+      try {
+        const { data, error } = await supabase
+          .from("profiles")
+          .select("role")
+          .eq("id", user.id)
+          .single();
+
+        if (error || !data?.role) {
+          setCurrentRole("OP_ESTOQUE");
+          return;
+        }
+        setCurrentRole(data.role);
+      } catch {
+        setCurrentRole("OP_ESTOQUE");
+      }
+    };
+
+    // Verificar imediatamente apenas se o contexto não tiver role
+    if (!contextRole) {
+      checkRole();
+    }
+
+    const interval = setInterval(checkRole, 30000); // Verificar a cada 30s
+
+    return () => clearInterval(interval);
+  }, [user, contextRole]);
+
+  const handleLogout = () => {
+    if (isLoggingOut) return;
+    setIsLoggingOut(true);
+
+    const forceMs = 5000;
+    const forceTimer = window.setTimeout(() => {
+      clearClientStorageAndGoLogin();
+    }, forceMs);
+
+    void supabase.auth
+      .signOut()
+      .then(() => {
+        window.clearTimeout(forceTimer);
+        try {
+          localStorage.removeItem("sga-inventory-auth");
+        } catch {
+          /* ignore */
+        }
+        window.location.href = "/login";
+      })
+      .catch(() => {
+        window.clearTimeout(forceTimer);
+        clearClientStorageAndGoLogin();
+      });
+  };
+
+  const toggleSubmenu = (name: string) => {
+    setOpenSubmenu(openSubmenu === name ? null : name);
+  };
+
+  // Não retornar null - sempre mostrar sidebar se tiver user, mesmo durante loading
+  if (!user) return null;
+
+  // Se ainda estiver carregando o role, mostrar menu com role padrão temporário
+  const displayRole = currentRole || contextRole || 'OP_ESTOQUE';
+
+  const menuItems = [
+    { 
+      name: "Dashboard", 
+      icon: <LayoutDashboard size={22} />, 
+      path: "/dashboard/visao-geral", 
+      roles: ["ADMIN"],
+      subItems: [
+        { name: "Visão Geral", path: "/dashboard/visao-geral", icon: <Eye size={18} /> },
+        { name: "Performance", path: "/dashboard/performance", icon: <TrendingUp size={18} /> },
+      ]
+    },
+    { 
+      name: "Pedidos", 
+      icon: <ShoppingCart size={22} />, 
+      path: "/orders", 
+      roles: ["ADMIN"],
+      subItems: [
+        { name: "Novo Pedido", path: "/orders/new", icon: <PlusCircle size={18} /> },
+        { name: "Lista de Pedidos", path: "/orders/list", icon: <List size={18} /> },
+      ]
+    },
+    { 
+      name: "Operador", 
+      icon: <QrCode size={22} />, 
+      path: "/operator/dashboard", 
+      roles: ["ADMIN", "OP_ESTOQUE"],
+      subItems: [
+        { name: "Dashboard", path: "/operator/dashboard", icon: <LayoutDashboard size={18} /> },
+        { name: "Operação", path: "/operator/production", icon: <QrCode size={18} /> },
+        { name: "Estoque", path: "/operator/estoque", icon: <Warehouse size={18} /> },
+      ]
+    },
+    { 
+      name: "Configurações", 
+      icon: <Settings size={22} />, 
+      path: "/config", 
+      roles: ["ADMIN"],
+      subItems: [
+        { name: "Kits", path: "/config/kits", icon: <Package size={18} /> },
+        { name: "Máquinas", path: "/config/machine", icon: <Cpu size={18} /> },
+        { name: "Material", path: "/config/material", icon: <Box size={18} /> },
+        { name: "Usuários", path: "/config/users", icon: <Users size={18} /> },
+      ]
+    },
+  ];
+
+  return (
+    <aside className={`relative bg-white border-r border-gray-100 flex flex-col h-screen sticky top-0 transition-all duration-300 ${isCollapsed ? "w-20" : "w-64"}`}>
+      <button onClick={() => setIsCollapsed(!isCollapsed)} className="hidden md:flex absolute -right-3 top-10 bg-[#5D286C] text-white rounded-full p-1 shadow-md z-50">
+        {isCollapsed ? <ChevronRight size={16} /> : <ChevronLeft size={16} />}
+      </button>
+
+      <div className="p-6 flex justify-center items-center border-b border-gray-50 h-24">
+        <Image src="/logo.jpg" alt="Logo" width={isCollapsed ? 32 : 120} height={32} className={`${isCollapsed ? "rounded-lg" : "w-auto h-8"}`} />
+      </div>
+
+      <nav className="flex-1 p-3 space-y-1 mt-4 overflow-y-auto">
+        {menuItems.map((item) => {
+          if (!item.roles.includes(displayRole)) return null;
+          
+          const hasSubItems = !!item.subItems;
+          const isActive = pathname.startsWith(item.path);
+          const isOpen = openSubmenu === item.name || (isActive && hasSubItems);
+
+          return (
+            <div key={item.name} className="space-y-1">
+              {hasSubItems ? (
+                <button
+                  onClick={() => toggleSubmenu(item.name)}
+                  className={`w-full flex items-center justify-between p-4 rounded-2xl font-bold transition-all ${isActive ? "bg-[#F8F1F9] text-[#5D286C]" : "text-[#262626] hover:bg-gray-50"}`}
+                >
+                  <div className="flex items-center gap-4">
+                    <span className="text-[#5D286C]">{item.icon}</span>
+                    {!isCollapsed && <span>{item.name}</span>}
+                  </div>
+                  {!isCollapsed && <ChevronDown size={16} className={`transition-transform ${isOpen ? "rotate-180" : ""}`} />}
+                </button>
+              ) : (
+                <Link
+                  href={item.path}
+                  onClick={onCloseMobile}
+                  className={`flex items-center gap-4 p-4 rounded-2xl font-bold transition-all ${isActive ? "bg-[#5D286C] text-white" : "text-[#262626] hover:bg-gray-50"}`}
+                >
+                  <span className={isActive ? "text-white" : "text-[#5D286C]"}>{item.icon}</span>
+                  {!isCollapsed && <span>{item.name}</span>}
+                </Link>
+              )}
+
+              {hasSubItems && isOpen && !isCollapsed && (
+                <div className="ml-4 pl-4 border-l-2 border-gray-100 space-y-1 animate-in slide-in-from-left-2">
+                  {item.subItems?.map((sub) => (
+                    <Link
+                      key={sub.path}
+                      href={sub.path}
+                      onClick={onCloseMobile}
+                      className={`flex items-center gap-3 p-3 rounded-xl text-sm font-bold transition-all ${pathname === sub.path ? "text-[#5D286C] bg-purple-50" : "text-gray-500 hover:text-[#5D286C] hover:bg-gray-50"}`}
+                    >
+                      {sub.icon}
+                      <span>{sub.name}</span>
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </div>
+          );
+        })}
+      </nav>
+
+      <div className="p-4 border-t border-gray-50 bg-gray-50/50">
+        <div className={`flex items-center gap-3 px-2 mb-4 ${isCollapsed ? "justify-center" : ""}`}>
+          <User size={20} className="text-[#7B1470]" />
+          {!isCollapsed && (
+            <div className="overflow-hidden">
+              <p className="text-sm font-black text-[#262626] truncate uppercase">{user.email?.split("@")[0]}</p>
+              <p className="text-[10px] font-bold text-[#5D286C] uppercase tracking-widest">
+                {roleDisplayLabel(displayRole)}
+              </p>
+            </div>
+          )}
+        </div>
+        <button 
+          onClick={handleLogout} 
+          disabled={isLoggingOut}
+          className="w-full flex items-center gap-3 p-4 text-[#44213F] font-bold hover:bg-red-50 hover:text-red-600 rounded-2xl transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+        >
+          <LogOut size={20} />
+          {!isCollapsed && <span>{isLoggingOut ? "Saindo..." : "Sair"}</span>}
+        </button>
+      </div>
+    </aside>
+  );
+}
