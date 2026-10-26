@@ -155,7 +155,7 @@ export default function Sidebar({ onCloseMobile }: SidebarProps) {
 
   return (
     <aside className={`relative bg-white border-r border-gray-100 flex flex-col h-screen sticky top-0 transition-all duration-300 ${isCollapsed ? "w-20" : "w-64"}`}>
-      <button onClick={() => setIsCollapsed(!isCollapsed)} className="hidden md:flex absolute -right-3 top-10 bg-[#5D286C] text-white rounded-full p-1 shadow-md z-50">
+      <button onClick={() => setIsCollapsed(!isCollapsed)} className="hidden md:flex absolute -right-3 top-10 bg-[#0F766E] text-white rounded-full p-1 shadow-md z-50">
         {isCollapsed ? <ChevronRight size={16} /> : <ChevronLeft size={16} />}
       </button>
 
@@ -176,10 +176,10 @@ export default function Sidebar({ onCloseMobile }: SidebarProps) {
               {hasSubItems ? (
                 <button
                   onClick={() => toggleSubmenu(item.name)}
-                  className={`w-full flex items-center justify-between p-4 rounded-2xl font-bold transition-all ${isActive ? "bg-[#F8F1F9] text-[#5D286C]" : "text-[#262626] hover:bg-gray-50"}`}
+                  className={`w-full flex items-center justify-between p-4 rounded-2xl font-bold transition-all ${isActive ? "bg-[#F0FDFA] text-[#0F766E]" : "text-[#262626] hover:bg-gray-50"}`}
                 >
                   <div className="flex items-center gap-4">
-                    <span className="text-[#5D286C]">{item.icon}</span>
+                    <span className="text-[#0F766E]">{item.icon}</span>
                     {!isCollapsed && <span>{item.name}</span>}
                   </div>
                   {!isCollapsed && <ChevronDown size={16} className={`transition-transform ${isOpen ? "rotate-180" : ""}`} />}
@@ -188,9 +188,9 @@ export default function Sidebar({ onCloseMobile }: SidebarProps) {
                 <Link
                   href={item.path}
                   onClick={onCloseMobile}
-                  className={`flex items-center gap-4 p-4 rounded-2xl font-bold transition-all ${isActive ? "bg-[#5D286C] text-white" : "text-[#262626] hover:bg-gray-50"}`}
+                  className={`flex items-center gap-4 p-4 rounded-2xl font-bold transition-all ${isActive ? "bg-[#0F766E] text-white" : "text-[#262626] hover:bg-gray-50"}`}
                 >
-                  <span className={isActive ? "text-white" : "text-[#5D286C]"}>{item.icon}</span>
+                  <span className={isActive ? "text-white" : "text-[#0F766E]"}>{item.icon}</span>
                   {!isCollapsed && <span>{item.name}</span>}
                 </Link>
               )}
@@ -202,7 +202,7 @@ export default function Sidebar({ onCloseMobile }: SidebarProps) {
                       key={sub.path}
                       href={sub.path}
                       onClick={onCloseMobile}
-                      className={`flex items-center gap-3 p-3 rounded-xl text-sm font-bold transition-all ${pathname === sub.path ? "text-[#5D286C] bg-purple-50" : "text-gray-500 hover:text-[#5D286C] hover:bg-gray-50"}`}
+                      className={`flex items-center gap-3 p-3 rounded-xl text-sm font-bold transition-all ${pathname === sub.path ? "text-[#0F766E] bg-teal-50" : "text-gray-500 hover:text-[#0F766E] hover:bg-gray-50"}`}
                     >
                       {sub.icon}
                       <span>{sub.name}</span>
@@ -217,11 +217,11 @@ export default function Sidebar({ onCloseMobile }: SidebarProps) {
 
       <div className="p-4 border-t border-gray-50 bg-gray-50/50">
         <div className={`flex items-center gap-3 px-2 mb-4 ${isCollapsed ? "justify-center" : ""}`}>
-          <User size={20} className="text-[#7B1470]" />
+          <User size={20} className="text-[#0E7490]" />
           {!isCollapsed && (
             <div className="overflow-hidden">
               <p className="text-sm font-black text-[#262626] truncate uppercase">{user.email?.split("@")[0]}</p>
-              <p className="text-[10px] font-bold text-[#5D286C] uppercase tracking-widest">
+              <p className="text-[10px] font-bold text-[#0F766E] uppercase tracking-widest">
                 {roleDisplayLabel(displayRole)}
               </p>
             </div>
@@ -230,7 +230,7 @@ export default function Sidebar({ onCloseMobile }: SidebarProps) {
         <button 
           onClick={handleLogout} 
           disabled={isLoggingOut}
-          className="w-full flex items-center gap-3 p-4 text-[#44213F] font-bold hover:bg-red-50 hover:text-red-600 rounded-2xl transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+          className="w-full flex items-center gap-3 p-4 text-[#134E4A] font-bold hover:bg-red-50 hover:text-red-600 rounded-2xl transition-all disabled:opacity-50 disabled:cursor-not-allowed"
         >
           <LogOut size={20} />
           {!isCollapsed && <span>{isLoggingOut ? "Saindo..." : "Sair"}</span>}

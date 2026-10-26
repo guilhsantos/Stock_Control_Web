@@ -29,7 +29,7 @@ export default function HomePage() {
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-white">
-      <Loader2 className="animate-spin text-[#5D286C] mb-4" size={48} />
+      <Loader2 className="animate-spin text-[#0F766E] mb-4" size={48} />
       <p className="text-gray-400 font-black uppercase text-[10px] tracking-[0.3em]">
         Sincronizando Acesso...
       </p>

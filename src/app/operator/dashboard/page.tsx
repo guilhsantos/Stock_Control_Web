@@ -296,7 +296,7 @@ export default function OperatorDashboardPage() {
   if (authLoading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-50">
-        <Loader2 className="animate-spin text-[#5D286C]" size={48} />
+        <Loader2 className="animate-spin text-[#0F766E]" size={48} />
       </div>
     );
   }

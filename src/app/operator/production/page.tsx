@@ -10,7 +10,7 @@ import MachineRow from "@/components/operator/MachineRow";
 
 const actions = [
   { title: "Produção", icon: <Hammer size={22} />, path: "/operator/manual-production", color: "bg-blue-600" },
-  { title: "Kits", icon: <Package size={22} />, path: "/operator/scanner", color: "bg-[#5D286C]" },
+  { title: "Kits", icon: <Package size={22} />, path: "/operator/scanner", color: "bg-[#0F766E]" },
   { title: "Defeito", icon: <AlertTriangle size={22} />, path: "/operator/defects", color: "bg-red-600" },
   { title: "Reservar", icon: <Archive size={22} />, path: "/operator/reserve", color: "bg-amber-600" },
   { title: "Baixa de Pedido", icon: <CheckCircle size={22} />, path: "/operator/checkout", color: "bg-green-600" },
@@ -71,12 +71,12 @@ export default function OperatorProductionPage() {
       <section className="space-y-4">
         <div className="flex items-center justify-between gap-3">
           <h2 className="text-xl font-black text-[#262626] flex items-center gap-2">
-            <Cpu className="text-[#5D286C]" size={22} /> Máquinas
+            <Cpu className="text-[#0F766E]" size={22} /> Máquinas
           </h2>
           <button
             type="button"
             onClick={() => void loadMachines()}
-            className="p-2 rounded-xl text-gray-400 hover:text-[#5D286C] hover:bg-white transition-all"
+            className="p-2 rounded-xl text-gray-400 hover:text-[#0F766E] hover:bg-white transition-all"
             title="Atualizar"
           >
             <RefreshCw size={18} />
@@ -92,7 +92,7 @@ export default function OperatorProductionPage() {
 
         {loading ? (
           <div className="flex justify-center py-10">
-            <Loader2 className="animate-spin text-[#5D286C]" size={32} />
+            <Loader2 className="animate-spin text-[#0F766E]" size={32} />
           </div>
         ) : machines.length === 0 ? (
           <p className="text-center text-gray-400 font-bold py-10">Nenhuma máquina cadastrada.</p>

@@ -223,7 +223,7 @@ export default function ReserveOrderPage() {
   return (
     <div className="max-w-4xl mx-auto space-y-8 p-4">
       <div className="flex items-center gap-4">
-        <Link href="/operator/production" className="p-3 bg-white border border-gray-100 rounded-2xl text-gray-400 hover:text-[#5D286C] shadow-sm">
+        <Link href="/operator/production" className="p-3 bg-white border border-gray-100 rounded-2xl text-gray-400 hover:text-[#0F766E] shadow-sm">
           <ArrowLeft size={20} />
         </Link>
         <h1 className="text-3xl font-black text-[#262626]">Reservar Kits do Pedido</h1>
@@ -237,13 +237,13 @@ export default function ReserveOrderPage() {
             onChange={(e) => setOrderCode(e.target.value)}
             onKeyDown={(e) => e.key === "Enter" && handleSearchOrder()}
             placeholder="Digite o código do pedido..."
-            className="w-full p-4 bg-gray-50 rounded-2xl font-bold outline-none border-2 border-transparent focus:border-[#5D286C]"
+            className="w-full p-4 bg-gray-50 rounded-2xl font-bold outline-none border-2 border-transparent focus:border-[#0F766E]"
           />
           <button
             type="button"
             onClick={handleSearchOrder}
             disabled={loading}
-            className="w-full bg-[#5D286C] text-white p-5 rounded-2xl font-black flex items-center justify-center gap-3"
+            className="w-full bg-[#0F766E] text-white p-5 rounded-2xl font-black flex items-center justify-center gap-3"
           >
             {loading ? <Loader2 className="animate-spin" /> : "Buscar Pedido"}
           </button>
@@ -281,7 +281,7 @@ export default function ReserveOrderPage() {
                   max={remaining}
                   value={qtyByItemId[item.id] ?? ""}
                   onChange={(e) => setReserveQty(item.id, e.target.value)}
-                  className="w-full p-3 bg-white rounded-2xl font-bold outline-none border-2 border-transparent focus:border-[#5D286C]"
+                  className="w-full p-3 bg-white rounded-2xl font-bold outline-none border-2 border-transparent focus:border-[#0F766E]"
                   placeholder="Quantidade para reservar"
                 />
               </div>
@@ -294,7 +294,7 @@ export default function ReserveOrderPage() {
               value={observation}
               onChange={(e) => setObservation(e.target.value)}
               placeholder="Ex: Separado para entrega parcial de amanhã."
-              className="mt-2 w-full p-4 bg-gray-50 rounded-2xl font-bold outline-none border-2 border-transparent focus:border-[#5D286C] min-h-[120px]"
+              className="mt-2 w-full p-4 bg-gray-50 rounded-2xl font-bold outline-none border-2 border-transparent focus:border-[#0F766E] min-h-[120px]"
             />
           </div>
 

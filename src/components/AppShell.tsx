@@ -62,7 +62,7 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
       <StuckAuthLoadingRecovery active={showAuthSplash} />
       {showAuthSplash ? (
         <div className="min-h-screen bg-white flex items-center justify-center">
-          <Loader2 className="animate-spin text-[#5D286C]" size={40} />
+          <Loader2 className="animate-spin text-[#0F766E]" size={40} />
         </div>
       ) : (
         renderContent()

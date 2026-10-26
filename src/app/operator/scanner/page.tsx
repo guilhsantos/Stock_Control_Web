@@ -199,11 +199,11 @@ export default function ScannerPage() {
                   type="text" 
                   value={manualCode} 
                   onChange={(e) => setManualCode(e.target.value)} 
-                  className="w-full p-4 bg-gray-50 rounded-2xl font-black outline-none border-2 border-transparent focus:border-[#5D286C]"
+                  className="w-full p-4 bg-gray-50 rounded-2xl font-black outline-none border-2 border-transparent focus:border-[#0F766E]"
                   placeholder="CÓDIGO"
                   autoFocus
                 />
-                <button onClick={() => handleIdentifyItem(manualCode.toUpperCase())} className="w-full bg-[#5D286C] text-white p-4 rounded-2xl font-black">CONFIRMAR</button>
+                <button onClick={() => handleIdentifyItem(manualCode.toUpperCase())} className="w-full bg-[#0F766E] text-white p-4 rounded-2xl font-black">CONFIRMAR</button>
               </div>
             </div>
           )}
@@ -214,7 +214,7 @@ export default function ScannerPage() {
            {scanResult ? (
              <div className="p-8 md:p-12 rounded-[2.5rem] text-center space-y-8 animate-in zoom-in bg-white shadow-2xl">
                 {isSearching ? (
-                  <div className="py-10 flex flex-col items-center"><Loader2 className="animate-spin text-[#5D286C]" size={40} /></div>
+                  <div className="py-10 flex flex-col items-center"><Loader2 className="animate-spin text-[#0F766E]" size={40} /></div>
                 ) : error ? (
                   <div className="space-y-6">
                     <AlertCircle size={60} className="mx-auto text-red-500" />
@@ -225,7 +225,7 @@ export default function ScannerPage() {
                   <>
                     <CheckCircle2 size={60} className="mx-auto text-green-500" />
                     <div>
-                       <p className="text-[#5D286C] font-black text-[10px] uppercase tracking-widest mb-2">Item Identificado</p>
+                       <p className="text-[#0F766E] font-black text-[10px] uppercase tracking-widest mb-2">Item Identificado</p>
                        <h2 className="text-3xl md:text-5xl font-black text-[#262626]">{itemInfo?.nome}</h2>
                        <p className="text-green-600 font-bold text-lg mt-4 uppercase">Estoque: {itemInfo?.qtd} un</p>
                     </div>
@@ -238,10 +238,10 @@ export default function ScannerPage() {
                            max={9999}
                            value={kitQty}
                            onChange={(e) => setKitQty(e.target.value)}
-                           className="w-full p-4 bg-gray-50 rounded-2xl font-black text-center text-lg outline-none border-2 border-transparent focus:border-[#5D286C]"
+                           className="w-full p-4 bg-gray-50 rounded-2xl font-black text-center text-lg outline-none border-2 border-transparent focus:border-[#0F766E]"
                          />
                        </div>
-                       <button onClick={confirmarProducao} disabled={isProcessing} className="w-full bg-[#5D286C] text-white p-5 rounded-3xl font-black text-xl shadow-xl shadow-purple-100 transition-all active:scale-95">
+                       <button onClick={confirmarProducao} disabled={isProcessing} className="w-full bg-[#0F766E] text-white p-5 rounded-3xl font-black text-xl shadow-xl shadow-teal-100 transition-all active:scale-95">
                          {isProcessing ? <Loader2 className="animate-spin mx-auto" /> : "CONFIRMAR ENTRADA"}
                        </button>
                        <button type="button" onClick={() => { setScanResult(null); setItemInfo(null); setKitQty("1"); }} className="w-full text-gray-400 font-bold text-xs uppercase tracking-widest">Cancelar</button>
@@ -252,9 +252,9 @@ export default function ScannerPage() {
            ) : (
              /* MODO DESKTOP (Sem câmera) */
              <div className="text-center space-y-8">
-                <div className="bg-purple-50 p-10 rounded-full inline-block text-[#5D286C] mb-4"><Laptop size={64} /></div>
+                <div className="bg-teal-50 p-10 rounded-full inline-block text-[#0F766E] mb-4"><Laptop size={64} /></div>
                 <h2 className="text-3xl font-black text-[#262626]">Aguardando Bipe...</h2>
-                <button onClick={() => setShowManualInput(true)} className="flex items-center gap-2 mx-auto text-gray-400 font-bold uppercase text-[10px] tracking-widest hover:text-[#5D286C]">
+                <button onClick={() => setShowManualInput(true)} className="flex items-center gap-2 mx-auto text-gray-400 font-bold uppercase text-[10px] tracking-widest hover:text-[#0F766E]">
                   <Keyboard size={18} /> Digitar Manualmente
                 </button>
              </div>

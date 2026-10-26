@@ -235,7 +235,7 @@ export default function OrderCheckoutPage() {
   return (
     <div className="max-w-4xl mx-auto space-y-8 p-4">
       <div className="flex items-center gap-4">
-        <Link href="/operator/production" className="p-3 bg-white border border-gray-100 rounded-2xl text-gray-400 hover:text-[#5D286C] shadow-sm">
+        <Link href="/operator/production" className="p-3 bg-white border border-gray-100 rounded-2xl text-gray-400 hover:text-[#0F766E] shadow-sm">
           <ArrowLeft size={20} />
         </Link>
         <h1 className="text-3xl font-black text-[#262626]">Baixa de Pedido</h1>
@@ -249,12 +249,12 @@ export default function OrderCheckoutPage() {
             onChange={(e) => setOrderCode(e.target.value)}
             onKeyPress={(e) => e.key === 'Enter' && handleSearchOrder()}
             placeholder="Digite o código do pedido..."
-            className="w-full p-4 bg-gray-50 rounded-2xl font-bold outline-none border-2 border-transparent focus:border-[#5D286C]"
+            className="w-full p-4 bg-gray-50 rounded-2xl font-bold outline-none border-2 border-transparent focus:border-[#0F766E]"
           />
           <button
             onClick={handleSearchOrder}
             disabled={loading}
-            className="w-full bg-[#5D286C] text-white p-5 rounded-2xl font-black flex items-center justify-center gap-3"
+            className="w-full bg-[#0F766E] text-white p-5 rounded-2xl font-black flex items-center justify-center gap-3"
           >
             {loading ? <Loader2 className="animate-spin" /> : "Buscar Pedido"}
           </button>
@@ -278,7 +278,7 @@ export default function OrderCheckoutPage() {
           <div className="bg-white p-6 rounded-[2rem] border border-gray-100 shadow-sm">
             <div className="flex items-center justify-between gap-2 mb-4">
               <h2 className="text-xl font-black flex items-center gap-2">
-                <Camera className="text-[#5D286C]" /> Fotos do Pedido
+                <Camera className="text-[#0F766E]" /> Fotos do Pedido
               </h2>
               <span className="text-xs font-black text-gray-400 uppercase shrink-0">
                 {photos.length}/{MAX_FOTOS}
@@ -334,7 +334,7 @@ export default function OrderCheckoutPage() {
                   type="button"
                   onClick={() => cameraInputRef.current?.click()}
                   disabled={isSubmitting}
-                  className={`border-2 border-dashed border-gray-300 rounded-2xl flex flex-col items-center justify-center gap-2 hover:border-[#5D286C] active:scale-95 transition-all ${
+                  className={`border-2 border-dashed border-gray-300 rounded-2xl flex flex-col items-center justify-center gap-2 hover:border-[#0F766E] active:scale-95 transition-all ${
                     photos.length === 0 ? "h-40" : "h-24"
                   }`}
                 >
@@ -345,7 +345,7 @@ export default function OrderCheckoutPage() {
                   type="button"
                   onClick={() => galleryInputRef.current?.click()}
                   disabled={isSubmitting}
-                  className={`border-2 border-dashed border-gray-300 rounded-2xl flex flex-col items-center justify-center gap-2 hover:border-[#5D286C] active:scale-95 transition-all ${
+                  className={`border-2 border-dashed border-gray-300 rounded-2xl flex flex-col items-center justify-center gap-2 hover:border-[#0F766E] active:scale-95 transition-all ${
                     photos.length === 0 ? "h-40" : "h-24"
                   }`}
                 >

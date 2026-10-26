@@ -6,7 +6,7 @@ export default function ConfigPage() {
   return (
     <div className="p-8 max-w-4xl mx-auto">
       <div className="flex items-center gap-4 mb-8">
-        <div className="bg-[#5D286C] p-3 rounded-2xl text-white">
+        <div className="bg-[#0F766E] p-3 rounded-2xl text-white">
           <Settings size={32} />
         </div>
         <h1 className="text-4xl font-black text-[#262626]">Configurações</h1>

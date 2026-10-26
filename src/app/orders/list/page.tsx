@@ -374,7 +374,7 @@ function OrdersListContent() {
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
         <div>
           <h1 className="text-3xl font-black text-[#262626] flex items-center gap-3">
-            <ShoppingCart className="text-[#5D286C]" /> Lista de Pedidos
+            <ShoppingCart className="text-[#0F766E]" /> Lista de Pedidos
           </h1>
           <div className="mt-4 flex flex-wrap items-center gap-2">
             <div className="inline-flex gap-2 rounded-2xl bg-gray-100 p-1 text-xs font-black uppercase">
@@ -384,7 +384,7 @@ function OrdersListContent() {
                   type="button"
                   onClick={() => setStatusTab(status)}
                   className={`px-3 py-2 rounded-2xl transition-all ${
-                    statusFilter === status ? "bg-white text-[#5D286C] shadow-sm" : "text-gray-400"
+                    statusFilter === status ? "bg-white text-[#0F766E] shadow-sm" : "text-gray-400"
                   }`}
                 >
                   {status}
@@ -395,7 +395,7 @@ function OrdersListContent() {
               <button
                 type="button"
                 onClick={() => setCodeSortDesc((v) => !v)}
-                className="inline-flex items-center gap-2 px-3 py-2 rounded-2xl bg-white border-2 border-gray-100 text-xs font-black text-[#5D286C] hover:border-[#5D286C]"
+                className="inline-flex items-center gap-2 px-3 py-2 rounded-2xl bg-white border-2 border-gray-100 text-xs font-black text-[#0F766E] hover:border-[#0F766E]"
                 title="Ordenar por código do pedido"
               >
                 Código {codeSortDesc ? <ArrowDownWideNarrow size={16} /> : <ArrowUpWideNarrow size={16} />}
@@ -410,7 +410,7 @@ function OrdersListContent() {
             placeholder="Buscar pedido ou cliente..."
             value={searchTerm}
             onChange={e => setSearchTerm(e.target.value)}
-            className="w-full p-4 pl-12 bg-white border-2 border-gray-50 rounded-2xl font-bold outline-none focus:border-[#5D286C] shadow-sm"
+            className="w-full p-4 pl-12 bg-white border-2 border-gray-50 rounded-2xl font-bold outline-none focus:border-[#0F766E] shadow-sm"
           />
         </div>
       </div>
@@ -420,7 +420,7 @@ function OrdersListContent() {
           <div key={order.id} className={`bg-white p-6 rounded-[2rem] border border-gray-50 shadow-sm hover:shadow-md transition-all flex flex-col md:flex-row justify-between gap-6 ${getOrderColor(order)}`}>
             <div className="space-y-1">
               <div className="flex items-center gap-2">
-                <span className="font-black text-[#5D286C] text-lg">
+                <span className="font-black text-[#0F766E] text-lg">
                   <Link
                     href={`/orders/${order.id}?returnStatus=${encodeURIComponent(statusFilter)}`}
                     className="hover:underline"
@@ -480,7 +480,7 @@ function OrdersListContent() {
                     </button>
                     <Link
                       href={`/orders/edit/${order.id}`}
-                      className="bg-[#5D286C] text-white px-6 py-3 rounded-2xl font-black text-xs flex items-center justify-center gap-2 hover:bg-[#7B1470] transition-all"
+                      className="bg-[#0F766E] text-white px-6 py-3 rounded-2xl font-black text-xs flex items-center justify-center gap-2 hover:bg-[#0E7490] transition-all"
                     >
                       <Edit size={16} /> Editar Pedido
                     </Link>
@@ -498,7 +498,7 @@ function OrdersListContent() {
                   <>
                     <Link
                       href={`/orders/${order.id}?returnStatus=${encodeURIComponent(statusFilter)}`}
-                      className="bg-[#5D286C] text-white px-6 py-3 rounded-2xl font-black text-xs flex items-center justify-center gap-2 hover:bg-[#7B1470] transition-all"
+                      className="bg-[#0F766E] text-white px-6 py-3 rounded-2xl font-black text-xs flex items-center justify-center gap-2 hover:bg-[#0E7490] transition-all"
                     >
                       <Eye size={16} /> Ver Detalhes
                     </Link>
@@ -523,7 +523,7 @@ function OrdersListContent() {
                   <>
                     <Link
                       href={`/orders/${order.id}?returnStatus=${encodeURIComponent(statusFilter)}`}
-                      className="bg-[#5D286C] text-white px-6 py-3 rounded-2xl font-black text-xs flex items-center justify-center gap-2 hover:bg-[#7B1470] transition-all"
+                      className="bg-[#0F766E] text-white px-6 py-3 rounded-2xl font-black text-xs flex items-center justify-center gap-2 hover:bg-[#0E7490] transition-all"
                     >
                       <Eye size={16} /> Ver Detalhes
                     </Link>
@@ -559,7 +559,7 @@ function OrdersListContent() {
               <Star className="text-red-600" size={20} /> Priorizar Pedido
             </h2>
             <p className="text-sm text-gray-600 font-bold mb-4">
-              Como deseja posicionar o pedido <span className="text-[#5D286C] font-black">{priorityModal.order?.codigo_unico}</span> em relação às outras prioridades?
+              Como deseja posicionar o pedido <span className="text-[#0F766E] font-black">{priorityModal.order?.codigo_unico}</span> em relação às outras prioridades?
             </p>
             <div className="flex flex-col gap-2">
               <button
@@ -599,7 +599,7 @@ function OrdersListContent() {
               <Undo2 className="text-amber-600" size={20} /> Confirmar Ação
             </h2>
             <p className="text-sm text-gray-600 font-bold mb-4">
-              Voltar o pedido <span className="text-[#5D286C] font-black">{backToPendingModal.order?.codigo_unico}</span> para Pendente? 
+              Voltar o pedido <span className="text-[#0F766E] font-black">{backToPendingModal.order?.codigo_unico}</span> para Pendente? 
               <br /><br />
               Isso irá repor os kits no estoque e apagar a foto.
             </p>
@@ -635,7 +635,7 @@ function OrdersListContent() {
               <Undo2 className="text-amber-600" size={20} /> Voltar para Concluído
             </h2>
             <p className="text-sm text-gray-600 font-bold mb-4">
-              O pedido <span className="text-[#5D286C] font-black">{revertDeliveredModal.order?.codigo_unico}</span> sairá de Entregue e voltará para Concluído. A nota fiscal, a data de faturamento e a data de entrega serão apagadas.
+              O pedido <span className="text-[#0F766E] font-black">{revertDeliveredModal.order?.codigo_unico}</span> sairá de Entregue e voltará para Concluído. A nota fiscal, a data de faturamento e a data de entrega serão apagadas.
             </p>
             <div className="flex flex-col gap-2">
               <button
@@ -671,7 +671,7 @@ function OrdersListContent() {
               <FileText className="text-green-600" size={20} /> Nota fiscal e faturamento
             </h2>
             <p className="text-sm text-gray-600 font-bold mb-4">
-              Informe a nota fiscal e a data de faturamento do pedido <span className="text-[#5D286C] font-black">{invoiceModal.order?.codigo_unico}</span>
+              Informe a nota fiscal e a data de faturamento do pedido <span className="text-[#0F766E] font-black">{invoiceModal.order?.codigo_unico}</span>
             </p>
             <div className="space-y-4">
               <div>
@@ -683,7 +683,7 @@ function OrdersListContent() {
                   value={invoiceModal.invoice}
                   onChange={(e) => setInvoiceModal({ ...invoiceModal, invoice: e.target.value })}
                   placeholder="Ex: 123456"
-                  className="w-full p-4 bg-gray-50 border-2 border-transparent focus:border-[#5D286C] focus:bg-white rounded-2xl font-bold outline-none transition-all"
+                  className="w-full p-4 bg-gray-50 border-2 border-transparent focus:border-[#0F766E] focus:bg-white rounded-2xl font-bold outline-none transition-all"
                   autoFocus
                   onKeyDown={(e) => {
                     if (e.key === "Enter") {
@@ -703,7 +703,7 @@ function OrdersListContent() {
                   value={invoiceModal.faturadoEm}
                   max={todayYmdBr()}
                   onChange={(e) => setInvoiceModal({ ...invoiceModal, faturadoEm: e.target.value })}
-                  className="w-full p-4 bg-gray-50 border-2 border-transparent focus:border-[#5D286C] focus:bg-white rounded-2xl font-bold outline-none transition-all"
+                  className="w-full p-4 bg-gray-50 border-2 border-transparent focus:border-[#0F766E] focus:bg-white rounded-2xl font-bold outline-none transition-all"
                 />
                 <p className="text-[10px] font-bold text-gray-400 ml-2 mt-1">Dia em que a nota foi emitida (hoje ou antes).</p>
               </div>
@@ -740,7 +740,7 @@ function OrdersListContent() {
               <AlertTriangle className="text-red-600" size={20} /> Confirmar Exclusão
             </h2>
             <p className="text-sm text-gray-600 font-bold mb-4">
-              Tem certeza que deseja excluir o pedido <span className="text-[#5D286C] font-black">{deleteModal.order?.codigo_unico}</span>?
+              Tem certeza que deseja excluir o pedido <span className="text-[#0F766E] font-black">{deleteModal.order?.codigo_unico}</span>?
               <br /><br />
               Esta ação não pode ser desfeita.
             </p>
@@ -770,7 +770,7 @@ export default function OrdersListPage() {
     <Suspense
       fallback={
         <div className="flex justify-center py-20">
-          <Loader2 className="animate-spin text-[#5D286C]" size={40} />
+          <Loader2 className="animate-spin text-[#0F766E]" size={40} />
         </div>
       }
     >

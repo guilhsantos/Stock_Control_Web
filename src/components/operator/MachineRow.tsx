@@ -105,7 +105,7 @@ export default function MachineRow({ machine, moldes, onUpdated }: MachineRowPro
             {MACHINE_STATUS_LABEL[machine.status]}
           </span>
         </div>
-        {saving && <Loader2 className="animate-spin text-[#5D286C] shrink-0" size={20} />}
+        {saving && <Loader2 className="animate-spin text-[#0F766E] shrink-0" size={20} />}
       </div>
 
       {/* Molde: só pode ser trocado com a máquina em operação */}
@@ -120,7 +120,7 @@ export default function MachineRow({ machine, moldes, onUpdated }: MachineRowPro
               value={machine.current_molde_id ?? ""}
               disabled={saving}
               onChange={(e) => handleMoldeChange(e.target.value)}
-              className={`w-full h-11 sm:h-12 px-3 rounded-2xl text-base font-bold outline-none border-2 focus:border-[#5D286C] disabled:opacity-60 ${
+              className={`w-full h-11 sm:h-12 px-3 rounded-2xl text-base font-bold outline-none border-2 focus:border-[#0F766E] disabled:opacity-60 ${
                 semMolde ? "bg-amber-50 border-amber-300 text-amber-800" : "bg-gray-50 border-transparent"
               }`}
             >
@@ -198,7 +198,7 @@ export default function MachineRow({ machine, moldes, onUpdated }: MachineRowPro
                   autoFocus
                   value={moldeRetorno}
                   onChange={(e) => setMoldeRetorno(e.target.value)}
-                  className="w-full h-12 px-3 bg-gray-50 rounded-2xl text-base font-bold outline-none border-2 border-transparent focus:border-[#5D286C]"
+                  className="w-full h-12 px-3 bg-gray-50 rounded-2xl text-base font-bold outline-none border-2 border-transparent focus:border-[#0F766E]"
                 >
                   <option value="" disabled>
                     Selecione o molde...
@@ -219,7 +219,7 @@ export default function MachineRow({ machine, moldes, onUpdated }: MachineRowPro
                   onChange={(e) => setObservacao(e.target.value)}
                   maxLength={500}
                   placeholder={pendingStatus === "PARADA" ? "Ex: falta de material, troca de molde..." : "Ex: troca de resistência"}
-                  className="w-full p-4 bg-gray-50 rounded-2xl text-base font-bold outline-none border-2 border-transparent focus:border-[#5D286C] min-h-[110px]"
+                  className="w-full p-4 bg-gray-50 rounded-2xl text-base font-bold outline-none border-2 border-transparent focus:border-[#0F766E] min-h-[110px]"
                 />
               </div>
             )}
@@ -228,7 +228,7 @@ export default function MachineRow({ machine, moldes, onUpdated }: MachineRowPro
               type="button"
               disabled={confirmDisabled}
               onClick={confirmStatus}
-              className="w-full bg-[#5D286C] text-white h-14 rounded-2xl font-black hover:bg-[#7B1470] transition-all disabled:opacity-50 flex items-center justify-center gap-2"
+              className="w-full bg-[#0F766E] text-white h-14 rounded-2xl font-black hover:bg-[#0E7490] transition-all disabled:opacity-50 flex items-center justify-center gap-2"
             >
               {saving ? <Loader2 className="animate-spin" size={20} /> : "CONFIRMAR"}
             </button>

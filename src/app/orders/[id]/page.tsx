@@ -78,7 +78,7 @@ function OrderDetailsInner() {
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <Loader2 className="animate-spin text-[#5D286C]" size={40} />
+        <Loader2 className="animate-spin text-[#0F766E]" size={40} />
       </div>
     );
   }
@@ -89,7 +89,7 @@ function OrderDetailsInner() {
         <button
           type="button"
           onClick={goBack}
-          className="inline-flex items-center gap-2 text-sm font-bold text-gray-500 hover:text-[#5D286C]"
+          className="inline-flex items-center gap-2 text-sm font-bold text-gray-500 hover:text-[#0F766E]"
         >
           <ArrowLeft size={18} /> Voltar
         </button>
@@ -114,7 +114,7 @@ function OrderDetailsInner() {
         <button
           type="button"
           onClick={goBack}
-          className="p-3 bg-white border border-gray-100 rounded-2xl text-gray-400 hover:text-[#5D286C] shadow-sm transition-all"
+          className="p-3 bg-white border border-gray-100 rounded-2xl text-gray-400 hover:text-[#0F766E] shadow-sm transition-all"
         >
           <ArrowLeft size={20} />
         </button>
@@ -167,7 +167,7 @@ function OrderDetailsInner() {
 
           <div className="bg-white p-6 rounded-[2rem] border border-gray-100 shadow-sm">
             <h2 className="text-sm font-black text-[#262626] mb-4 flex items-center gap-2 uppercase tracking-widest">
-              <Package size={16} className="text-[#5D286C]" /> Itens do Pedido
+              <Package size={16} className="text-[#0F766E]" /> Itens do Pedido
             </h2>
             <div className="space-y-3">
               {sortedItems.map((item: any, idx: number) => {
@@ -222,7 +222,7 @@ function OrderDetailsInner() {
                   </div>
                   <span
                     className={`text-xs font-black shrink-0 ${
-                      reserved > 0 ? "text-amber-700" : "text-[#5D286C]"
+                      reserved > 0 ? "text-amber-700" : "text-[#0F766E]"
                     }`}
                   >
                     {item.quantidade} un.
@@ -280,7 +280,7 @@ function OrderDetailsInner() {
             )}
           </div>
 
-          <Link href={listHref} className="block text-center text-xs font-black text-gray-500 hover:text-[#5D286C]">
+          <Link href={listHref} className="block text-center text-xs font-black text-gray-500 hover:text-[#0F766E]">
             Ver todos os pedidos
           </Link>
         </div>
@@ -350,7 +350,7 @@ export default function OrderDetailsPage() {
     <Suspense
       fallback={
         <div className="min-h-screen flex items-center justify-center">
-          <Loader2 className="animate-spin text-[#5D286C]" size={40} />
+          <Loader2 className="animate-spin text-[#0F766E]" size={40} />
         </div>
       }
     >

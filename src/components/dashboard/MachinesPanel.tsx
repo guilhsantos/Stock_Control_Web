@@ -178,7 +178,7 @@ function MachineCard({ view }: { view: MachineView }) {
           <p className="text-[10px] font-black text-gray-400 uppercase">Molde atual</p>
           {machine.moldes ? (
             <div className="flex items-baseline justify-between gap-2">
-              <p className="font-black text-[#5D286C] break-words min-w-0">{machine.moldes.nome}</p>
+              <p className="font-black text-[#0F766E] break-words min-w-0">{machine.moldes.nome}</p>
               <div className="text-right shrink-0">
                 <p className="text-3xl font-black text-[#262626] leading-none">
                   {view.atual.ok}
@@ -238,7 +238,7 @@ function MachineListItem({ view }: { view: MachineView }) {
             <StatusBadge view={view} />
           </div>
           <div className="flex items-baseline justify-between gap-2">
-            <p className={`text-sm font-bold truncate ${machine.moldes ? "text-[#5D286C]" : "text-amber-600"}`}>
+            <p className={`text-sm font-bold truncate ${machine.moldes ? "text-[#0F766E]" : "text-amber-600"}`}>
               {machine.moldes?.nome ?? "Sem molde"}
             </p>
             {machine.moldes && (
@@ -270,7 +270,7 @@ export default function MachinesPanel({ machines, production, defects, materials
       <div className="flex flex-col md:flex-row md:items-start justify-between gap-3 md:gap-4">
         <div>
           <h2 className="text-xl md:text-2xl font-black text-[#262626] flex items-center gap-2">
-            <Cpu className="text-[#5D286C]" size={24} /> Máquinas
+            <Cpu className="text-[#0F766E]" size={24} /> Máquinas
           </h2>
           <p className="text-[10px] font-bold text-gray-400 uppercase">Produção ok (produzido − defeitos) no período filtrado</p>
         </div>

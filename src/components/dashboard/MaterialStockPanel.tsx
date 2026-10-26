@@ -18,7 +18,7 @@ export default function MaterialStockPanel({ materials }: { materials: MaterialS
   return (
     <div className="w-full md:w-72 shrink-0 bg-gray-50 border border-gray-100 rounded-2xl p-3">
       <p className="text-[10px] font-black text-gray-500 uppercase flex items-center gap-1 mb-2">
-        <Box size={12} className="text-[#5D286C]" /> Estoque de material
+        <Box size={12} className="text-[#0F766E]" /> Estoque de material
       </p>
 
       {sorted.length === 0 ? (
@@ -38,7 +38,7 @@ export default function MaterialStockPanel({ materials }: { materials: MaterialS
                 </div>
                 <div className="w-full bg-gray-200 h-1 rounded-full overflow-hidden mt-1">
                   <div
-                    className={`h-full ${baixo ? "bg-red-500" : "bg-[#5D286C]"}`}
+                    className={`h-full ${baixo ? "bg-red-500" : "bg-[#0F766E]"}`}
                     style={{ width: `${Math.max(2, (kg / max) * 100)}%` }}
                   />
                 </div>

@@ -141,7 +141,7 @@ export default function EditOrderPage() {
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <Loader2 className="animate-spin text-[#5D286C]" size={40} />
+        <Loader2 className="animate-spin text-[#0F766E]" size={40} />
       </div>
     );
   }
@@ -149,7 +149,7 @@ export default function EditOrderPage() {
   return (
     <div className="max-w-3xl mx-auto space-y-8 p-4">
       <div className="flex items-center gap-4">
-        <Link href="/orders/list" className="p-3 bg-white border border-gray-100 rounded-2xl text-gray-400 hover:text-[#5D286C] shadow-sm transition-all">
+        <Link href="/orders/list" className="p-3 bg-white border border-gray-100 rounded-2xl text-gray-400 hover:text-[#0F766E] shadow-sm transition-all">
           <ArrowLeft size={20} />
         </Link>
         <h1 className="text-3xl font-black text-[#262626]">Editar Pedido</h1>
@@ -170,7 +170,7 @@ export default function EditOrderPage() {
                 required
                 value={orderData.code}
                 onChange={e => setOrderData({...orderData, code: e.target.value.toUpperCase()})}
-                className="w-full p-4 bg-gray-50 rounded-2xl font-bold outline-none border-2 border-transparent focus:border-[#5D286C]" 
+                className="w-full p-4 bg-gray-50 rounded-2xl font-bold outline-none border-2 border-transparent focus:border-[#0F766E]" 
                 placeholder="EX: ORD-2024-001"
               />
             </div>
@@ -182,7 +182,7 @@ export default function EditOrderPage() {
                 lang="pt-BR"
                 value={orderData.deliveryDate}
                 onChange={e => setOrderData({...orderData, deliveryDate: e.target.value})}
-                className="w-full p-4 bg-gray-50 rounded-2xl font-bold outline-none border-2 border-transparent focus:border-[#5D286C]" 
+                className="w-full p-4 bg-gray-50 rounded-2xl font-bold outline-none border-2 border-transparent focus:border-[#0F766E]" 
               />
             </div>
           </div>
@@ -192,7 +192,7 @@ export default function EditOrderPage() {
               required
               value={orderData.client}
               onChange={e => setOrderData({...orderData, client: e.target.value})}
-              className="w-full p-4 bg-gray-50 rounded-2xl font-bold outline-none border-2 border-transparent focus:border-[#5D286C]" 
+              className="w-full p-4 bg-gray-50 rounded-2xl font-bold outline-none border-2 border-transparent focus:border-[#0F766E]" 
               placeholder="Nome completo ou Razão Social"
             />
           </div>
@@ -203,7 +203,7 @@ export default function EditOrderPage() {
             <textarea 
               value={orderData.notes}
               onChange={e => setOrderData({...orderData, notes: e.target.value})}
-              className="w-full p-4 bg-gray-50 rounded-2xl font-bold outline-none border-2 border-transparent focus:border-[#5D286C] min-h-[100px]" 
+              className="w-full p-4 bg-gray-50 rounded-2xl font-bold outline-none border-2 border-transparent focus:border-[#0F766E] min-h-[100px]" 
               placeholder="Observações adicionais sobre o pedido..."
             />
           </div>
@@ -211,13 +211,13 @@ export default function EditOrderPage() {
 
         {/* Seleção de Kits */}
         <div className="bg-white p-5 md:p-8 rounded-[1.5rem] md:rounded-[2.5rem] border-2 border-gray-50 shadow-sm space-y-4">
-          <h2 className="text-lg md:text-xl font-black flex items-center gap-2 text-[#5D286C]"><Plus /> Adicionar Kits ao Pedido</h2>
+          <h2 className="text-lg md:text-xl font-black flex items-center gap-2 text-[#0F766E]"><Plus /> Adicionar Kits ao Pedido</h2>
           
           <div className="flex gap-2">
             <select 
               value={currentKitSelection} 
               onChange={e => setCurrentKitSelection(e.target.value)} 
-              className="flex-1 p-3.5 md:p-4 bg-gray-50 rounded-xl md:rounded-2xl font-bold outline-none border-2 border-transparent focus:border-[#5D286C] text-sm appearance-none"
+              className="flex-1 p-3.5 md:p-4 bg-gray-50 rounded-xl md:rounded-2xl font-bold outline-none border-2 border-transparent focus:border-[#0F766E] text-sm appearance-none"
             >
               <option value="">Selecione um Kit...</option>
               {availableKits.map(k => (
@@ -227,7 +227,7 @@ export default function EditOrderPage() {
             <button 
               type="button"
               onClick={handleAddKit} 
-              className="bg-[#5D286C] text-white p-3.5 md:p-4 rounded-xl md:rounded-2xl shadow-lg hover:scale-105 transition-transform shrink-0"
+              className="bg-[#0F766E] text-white p-3.5 md:p-4 rounded-xl md:rounded-2xl shadow-lg hover:scale-105 transition-transform shrink-0"
             >
               <Plus size={24}/>
             </button>
@@ -235,9 +235,9 @@ export default function EditOrderPage() {
 
           <div className="space-y-3 mt-4">
             {selectedKits.map(item => (
-              <div key={item.kit_id} className="flex items-center justify-between bg-purple-50 p-4 rounded-2xl animate-in slide-in-from-top-1">
+              <div key={item.kit_id} className="flex items-center justify-between bg-teal-50 p-4 rounded-2xl animate-in slide-in-from-top-1">
                 <div className="flex flex-col flex-1 min-w-0 mr-2">
-                  <span className="font-black text-[#5D286C] text-sm truncate">
+                  <span className="font-black text-[#0F766E] text-sm truncate">
                     {availableKits.find(k => k.id === item.kit_id)?.codigo_unico}
                   </span>
                   <span className="text-[10px] font-bold text-gray-500 truncate">
@@ -255,7 +255,7 @@ export default function EditOrderPage() {
                         newItems.find(i => i.kit_id === item.kit_id)!.qty = parseInt(e.target.value) || 1;
                         setSelectedKits(newItems);
                       }} 
-                      className="w-12 p-1.5 rounded-lg text-center font-black text-[#5D286C] text-sm" 
+                      className="w-12 p-1.5 rounded-lg text-center font-black text-[#0F766E] text-sm" 
                     />
                   </div>
                   <button 
@@ -274,7 +274,7 @@ export default function EditOrderPage() {
         <button 
           type="submit" 
           disabled={isSubmitting}
-          className="w-full bg-[#5D286C] text-white p-6 rounded-3xl font-black text-xl shadow-xl hover:bg-[#7B1470] transition-all flex items-center justify-center gap-3 disabled:opacity-50"
+          className="w-full bg-[#0F766E] text-white p-6 rounded-3xl font-black text-xl shadow-xl hover:bg-[#0E7490] transition-all flex items-center justify-center gap-3 disabled:opacity-50"
         >
           {isSubmitting ? "SALVANDO..." : <><Save size={24} /> SALVAR ALTERAÇÕES</>}
         </button>

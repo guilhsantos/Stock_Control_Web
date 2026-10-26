@@ -327,7 +327,7 @@ export default function EstoqueView() {
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-white">
-        <Loader2 className="animate-spin text-[#5D286C]" size={48} />
+        <Loader2 className="animate-spin text-[#0F766E]" size={48} />
       </div>
     );
   }
@@ -342,13 +342,13 @@ export default function EstoqueView() {
         <div className="flex gap-2 flex-wrap">
           <button
             onClick={() => openCalculator()}
-            className="bg-[#5D286C] text-white border-2 border-[#5D286C] p-4 rounded-2xl font-black text-xs hover:bg-[#7B1470] transition-all flex items-center gap-2"
+            className="bg-[#0F766E] text-white border-2 border-[#0F766E] p-4 rounded-2xl font-black text-xs hover:bg-[#0E7490] transition-all flex items-center gap-2"
           >
             <Calculator size={16} /> Calculadora Pedidos
           </button>
           <button
             onClick={fetchData}
-            className="bg-white border-2 border-gray-100 p-4 rounded-2xl font-black text-xs hover:border-[#5D286C] transition-all flex items-center gap-2"
+            className="bg-white border-2 border-gray-100 p-4 rounded-2xl font-black text-xs hover:border-[#0F766E] transition-all flex items-center gap-2"
           >
             <Activity size={16} /> ATUALIZAR
           </button>
@@ -360,7 +360,7 @@ export default function EstoqueView() {
           <button
             onClick={() => setActiveTab("kit")}
             className={`px-3 py-2 rounded-2xl transition-all ${
-              activeTab === "kit" ? "bg-white text-[#5D286C] shadow-sm" : "text-gray-400"
+              activeTab === "kit" ? "bg-white text-[#0F766E] shadow-sm" : "text-gray-400"
             }`}
           >
             Kit
@@ -368,7 +368,7 @@ export default function EstoqueView() {
           <button
             onClick={() => setActiveTab("pecas")}
             className={`px-3 py-2 rounded-2xl transition-all ${
-              activeTab === "pecas" ? "bg-white text-[#5D286C] shadow-sm" : "text-gray-400"
+              activeTab === "pecas" ? "bg-white text-[#0F766E] shadow-sm" : "text-gray-400"
             }`}
           >
             Peças
@@ -379,7 +379,7 @@ export default function EstoqueView() {
           onClick={() =>
             activeTab === "kit" ? setSortKits((s) => cycleSort(s)) : setSortPecas((s) => cycleSort(s))
           }
-          className="inline-flex items-center gap-2 px-4 py-2 bg-white border-2 border-gray-100 rounded-2xl text-xs font-black text-[#5D286C] hover:border-[#5D286C] transition-all"
+          className="inline-flex items-center gap-2 px-4 py-2 bg-white border-2 border-gray-100 rounded-2xl text-xs font-black text-[#0F766E] hover:border-[#0F766E] transition-all"
           title="Ordenar por estoque"
         >
           {activeTab === "kit" ? (
@@ -409,8 +409,8 @@ export default function EstoqueView() {
                 className="bg-white p-6 rounded-[2rem] shadow-sm border border-gray-100 hover:shadow-md transition-all"
               >
                 <div className="flex items-center gap-3 mb-3">
-                  <div className="p-3 bg-purple-50 rounded-xl">
-                    <Package className="text-[#5D286C]" size={24} />
+                  <div className="p-3 bg-teal-50 rounded-xl">
+                    <Package className="text-[#0F766E]" size={24} />
                   </div>
                   <div className="flex-1 min-w-0">
                     <p className="text-xs font-black text-gray-400 uppercase truncate">{kit.codigo_unico}</p>
@@ -429,7 +429,7 @@ export default function EstoqueView() {
                   )}
                 </div>
                 <div className="pt-3 border-t border-gray-100">
-                  <p className="text-2xl font-black text-[#5D286C]">{kit.estoque_atual || 0}</p>
+                  <p className="text-2xl font-black text-[#0F766E]">{kit.estoque_atual || 0}</p>
                   <p className="text-xs font-bold text-gray-400 uppercase">unidades</p>
                 </div>
               </div>
@@ -515,7 +515,7 @@ export default function EstoqueView() {
                 value={removeModal.qtd}
                 onChange={(e) => setRemoveModal({ ...removeModal, qtd: e.target.value })}
                 placeholder={`1 a ${removeModal.kit.estoque_atual || 0}`}
-                className="w-full p-4 bg-gray-50 rounded-2xl text-base font-bold outline-none border-2 border-transparent focus:border-[#5D286C]"
+                className="w-full p-4 bg-gray-50 rounded-2xl text-base font-bold outline-none border-2 border-transparent focus:border-[#0F766E]"
               />
             </div>
             <div className="space-y-1">
@@ -529,7 +529,7 @@ export default function EstoqueView() {
                 value={removeModal.motivo}
                 onChange={(e) => setRemoveModal({ ...removeModal, motivo: e.target.value })}
                 placeholder="Ex: acerto de inventário"
-                className="w-full p-4 bg-gray-50 rounded-2xl text-base font-bold outline-none border-2 border-transparent focus:border-[#5D286C]"
+                className="w-full p-4 bg-gray-50 rounded-2xl text-base font-bold outline-none border-2 border-transparent focus:border-[#0F766E]"
               />
             </div>
 
@@ -571,7 +571,7 @@ export default function EstoqueView() {
             <div className="p-6 border-b border-gray-100 flex items-center justify-between shrink-0">
               <div>
                 <h2 className="text-xl font-black text-[#262626] flex items-center gap-2">
-                  <Calculator className="text-[#5D286C]" size={22} />
+                  <Calculator className="text-[#0F766E]" size={22} />
                   Calculadora de Produção
                 </h2>
                 <p className="text-xs font-bold text-gray-400 uppercase mt-1">
@@ -587,7 +587,7 @@ export default function EstoqueView() {
             <div className="flex-1 overflow-y-auto p-6">
               {calcLoading ? (
                 <div className="flex items-center justify-center py-16">
-                  <Loader2 className="animate-spin text-[#5D286C]" size={40} />
+                  <Loader2 className="animate-spin text-[#0F766E]" size={40} />
                 </div>
               ) : calcStep === "select" ? (
                 <div className="space-y-3">
@@ -603,13 +603,13 @@ export default function EstoqueView() {
                             placeholder="Buscar por código ou cliente..."
                             value={calcSearchTerm}
                             onChange={(e) => setCalcSearchTerm(e.target.value)}
-                            className="w-full p-3 pl-10 bg-white border-2 border-gray-100 rounded-2xl text-sm font-bold outline-none focus:border-[#5D286C]"
+                            className="w-full p-3 pl-10 bg-white border-2 border-gray-100 rounded-2xl text-sm font-bold outline-none focus:border-[#0F766E]"
                           />
                         </div>
                         <button
                           type="button"
                           onClick={() => setCalcCodeSortDesc((v) => !v)}
-                          className="inline-flex items-center justify-center gap-2 px-3 py-3 rounded-2xl bg-white border-2 border-gray-100 text-xs font-black text-[#5D286C] hover:border-[#5D286C]"
+                          className="inline-flex items-center justify-center gap-2 px-3 py-3 rounded-2xl bg-white border-2 border-gray-100 text-xs font-black text-[#0F766E] hover:border-[#0F766E]"
                           title="Ordenar por código do pedido"
                         >
                           Código {calcCodeSortDesc ? <ArrowDownWideNarrow size={16} /> : <ArrowUpWideNarrow size={16} />}
@@ -622,7 +622,7 @@ export default function EstoqueView() {
                         <button
                           type="button"
                           onClick={toggleSelectAll}
-                          className="text-xs font-black text-[#5D286C] hover:underline"
+                          className="text-xs font-black text-[#0F766E] hover:underline"
                         >
                           {visiblePendingOrders.length > 0 &&
                           visiblePendingOrders.every((order) => selectedOrderIds.has(order.id))
@@ -641,13 +641,13 @@ export default function EstoqueView() {
                             onClick={() => toggleOrder(order.id)}
                             className={`flex items-center gap-4 p-4 rounded-2xl border-2 cursor-pointer transition-all ${
                               selected
-                                ? "border-[#5D286C] bg-purple-50"
+                                ? "border-[#0F766E] bg-teal-50"
                                 : "border-gray-100 bg-white hover:border-gray-200"
                             }`}
                           >
                             <div
                               className={`w-5 h-5 rounded-lg border-2 shrink-0 flex items-center justify-center transition-colors ${
-                                selected ? "border-[#5D286C] bg-[#5D286C]" : "border-gray-300"
+                                selected ? "border-[#0F766E] bg-[#0F766E]" : "border-gray-300"
                               }`}
                             >
                               {selected && <CheckCircle size={12} className="text-white" />}
@@ -657,7 +657,7 @@ export default function EstoqueView() {
                               <p className="text-xs font-bold text-gray-500 truncate">{order.cliente}</p>
                             </div>
                             <div className="text-right shrink-0">
-                              <p className="text-sm font-black text-[#5D286C]">{totalKits}</p>
+                              <p className="text-sm font-black text-[#0F766E]">{totalKits}</p>
                               <p className="text-[10px] font-bold text-gray-400 uppercase">pedido</p>
                               <p className="text-[10px] font-bold text-amber-600">
                                 Rsv {reservedKits} · Falta {missingKits}
@@ -693,7 +693,7 @@ export default function EstoqueView() {
                   {/* Resumo de kits */}
                   <div>
                     <h3 className="text-sm font-black text-[#262626] uppercase tracking-widest mb-3 flex items-center gap-2">
-                      <Package size={16} className="text-[#5D286C]" /> Kits
+                      <Package size={16} className="text-[#0F766E]" /> Kits
                     </h3>
                     <div className="overflow-x-auto rounded-2xl border border-gray-100">
                       <table className="w-full text-sm">
@@ -792,7 +792,7 @@ export default function EstoqueView() {
                   <button
                     onClick={runCalculation}
                     disabled={selectedOrderIds.size === 0 || calcLoading}
-                    className="px-5 py-3 bg-[#5D286C] text-white rounded-2xl font-black text-sm hover:bg-[#7B1470] transition-all disabled:opacity-50 flex items-center gap-2"
+                    className="px-5 py-3 bg-[#0F766E] text-white rounded-2xl font-black text-sm hover:bg-[#0E7490] transition-all disabled:opacity-50 flex items-center gap-2"
                   >
                     <Calculator size={16} /> Calcular
                   </button>
@@ -807,7 +807,7 @@ export default function EstoqueView() {
                   </button>
                   <button
                     onClick={() => setCalcOpen(false)}
-                    className="px-5 py-3 bg-[#5D286C] text-white rounded-2xl font-black text-sm hover:bg-[#7B1470] transition-all"
+                    className="px-5 py-3 bg-[#0F766E] text-white rounded-2xl font-black text-sm hover:bg-[#0E7490] transition-all"
                   >
                     Fechar
                   </button>

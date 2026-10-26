@@ -92,25 +92,25 @@ export default function MachineConfigPage() {
       <div className="grid md:grid-cols-2 gap-10">
         {/* Formulário */}
         <form onSubmit={handleCreate} className="bg-white p-8 rounded-[2.5rem] border-2 border-gray-50 shadow-sm space-y-6 h-fit">
-          <h2 className="text-2xl font-black flex items-center gap-3"><Plus className="text-[#5D286C]" /> Nova Máquina</h2>
+          <h2 className="text-2xl font-black flex items-center gap-3"><Plus className="text-[#0F766E]" /> Nova Máquina</h2>
           <div className="space-y-2">
             <label className="text-xs font-black text-gray-400 uppercase ml-2">Identificação / Nome</label>
             <input 
               required 
               value={newName} 
               onChange={(e) => setNewName(e.target.value)} 
-              className="w-full p-4 bg-gray-50 rounded-2xl font-bold outline-none border-2 border-transparent focus:border-[#5D286C]" 
+              className="w-full p-4 bg-gray-50 rounded-2xl font-bold outline-none border-2 border-transparent focus:border-[#0F766E]" 
               placeholder="Ex: Injetora 01 - 120T" 
             />
           </div>
-          <button disabled={isSubmitting} type="submit" className="w-full bg-[#5D286C] text-white p-5 rounded-3xl font-black flex items-center justify-center gap-3 shadow-lg">
+          <button disabled={isSubmitting} type="submit" className="w-full bg-[#0F766E] text-white p-5 rounded-3xl font-black flex items-center justify-center gap-3 shadow-lg">
             {isSubmitting ? <Loader2 className="animate-spin"/> : <><Save size={20} /> CADASTRAR MÁQUINA</>}
           </button>
         </form>
 
         {/* Listagem */}
         <div className="space-y-4">
-          <h2 className="text-2xl font-black flex items-center gap-3"><Cpu className="text-[#5D286C]" /> Parque de Máquinas</h2>
+          <h2 className="text-2xl font-black flex items-center gap-3"><Cpu className="text-[#0F766E]" /> Parque de Máquinas</h2>
           <div className="space-y-3">
             {machines.map(m => (
               <div key={m.id} className="bg-white p-5 rounded-3xl border border-gray-100 flex justify-between items-center shadow-sm group">
@@ -119,7 +119,7 @@ export default function MachineConfigPage() {
                     <input
                       value={editingName}
                       onChange={e => setEditingName(e.target.value)}
-                      className="w-full p-2 bg-gray-50 rounded-xl font-bold outline-none border-2 border-transparent focus:border-[#5D286C]"
+                      className="w-full p-2 bg-gray-50 rounded-xl font-bold outline-none border-2 border-transparent focus:border-[#0F766E]"
                     />
                   ) : (
                     <p className="font-black text-[#262626]">{m.nome}</p>
@@ -133,7 +133,7 @@ export default function MachineConfigPage() {
                     <button
                       type="button"
                       onClick={() => handleSaveEdit(m.id)}
-                      className="text-[#5D286C] font-black text-xs"
+                      className="text-[#0F766E] font-black text-xs"
                     >
                       SALVAR
                     </button>

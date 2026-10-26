@@ -138,7 +138,7 @@ export default function KitsConfigPage() {
           onClick={() => setActiveTab('kits')} 
           className={`px-3 py-2 rounded-2xl transition-all ${
             activeTab === 'kits'
-              ? "bg-white text-[#5D286C] shadow-sm"
+              ? "bg-white text-[#0F766E] shadow-sm"
               : "text-gray-400"
           }`}
         >
@@ -148,7 +148,7 @@ export default function KitsConfigPage() {
           onClick={() => setActiveTab('moldes')} 
           className={`px-3 py-2 rounded-2xl transition-all ${
             activeTab === 'moldes'
-              ? "bg-white text-[#5D286C] shadow-sm"
+              ? "bg-white text-[#0F766E] shadow-sm"
               : "text-gray-400"
           }`}
         >
@@ -161,18 +161,18 @@ export default function KitsConfigPage() {
           <form onSubmit={handleSaveMolde} className="bg-white p-4 md:p-5 lg:p-8 rounded-xl md:rounded-[1.5rem] lg:rounded-[2.5rem] border-2 border-gray-50 shadow-sm space-y-5 h-fit">
             <div className="flex justify-between items-center">
               <h2 className="text-xl md:text-2xl font-black flex items-center gap-2">
-                {editingMoldeId ? <><Edit2 className="text-blue-500" size={20} /> Editar</> : <><Plus className="text-[#5D286C]" size={20} /> Novo Molde</>}
+                {editingMoldeId ? <><Edit2 className="text-blue-500" size={20} /> Editar</> : <><Plus className="text-[#0F766E]" size={20} /> Novo Molde</>}
               </h2>
               {editingMoldeId && <button type="button" onClick={() => {setEditingMoldeId(null); setNomeMolde("");}} className="text-gray-400"><X size={20}/></button>}
             </div>
-            <input required value={nomeMolde} onChange={(e) => setNomeMolde(e.target.value)} className="w-full p-4 bg-gray-50 rounded-xl md:rounded-2xl font-bold outline-none border-2 border-transparent focus:border-[#5D286C]" placeholder="Nome da Peça" />
-            <button type="submit" className={`w-full text-white p-4 md:p-5 rounded-2xl md:rounded-3xl font-black flex items-center justify-center gap-3 shadow-lg transition-all ${editingMoldeId ? 'bg-blue-600' : 'bg-[#5D286C]'}`}>
+            <input required value={nomeMolde} onChange={(e) => setNomeMolde(e.target.value)} className="w-full p-4 bg-gray-50 rounded-xl md:rounded-2xl font-bold outline-none border-2 border-transparent focus:border-[#0F766E]" placeholder="Nome da Peça" />
+            <button type="submit" className={`w-full text-white p-4 md:p-5 rounded-2xl md:rounded-3xl font-black flex items-center justify-center gap-3 shadow-lg transition-all ${editingMoldeId ? 'bg-blue-600' : 'bg-[#0F766E]'}`}>
               <Save size={18} /> {editingMoldeId ? "ATUALIZAR" : "SALVAR MOLDE"}
             </button>
           </form>
 
           <div className="space-y-4">
-            <h2 className="text-lg md:text-xl font-black flex items-center gap-2 px-2 text-[#262626]"><Hammer className="text-[#5D286C]" size={20} /> Moldes Ativos</h2>
+            <h2 className="text-lg md:text-xl font-black flex items-center gap-2 px-2 text-[#262626]"><Hammer className="text-[#0F766E]" size={20} /> Moldes Ativos</h2>
             <div className="space-y-3">
               {moldes.map(m => (
                 <div key={m.id} className="bg-white p-3 md:p-4 rounded-xl md:rounded-2xl border border-gray-100 flex justify-between items-center shadow-sm group">
@@ -191,14 +191,14 @@ export default function KitsConfigPage() {
           <div className="bg-white p-4 md:p-5 lg:p-8 rounded-xl md:rounded-[1.5rem] lg:rounded-[2.5rem] border-2 border-gray-50 shadow-sm space-y-4 h-fit">
             <div className="flex justify-between items-center">
               <h2 className="text-xl font-black flex items-center gap-2">
-                {editingKitId ? <Edit2 className="text-blue-500" size={20}/> : <Plus className="text-[#5D286C]" size={20} />} 
+                {editingKitId ? <Edit2 className="text-blue-500" size={20}/> : <Plus className="text-[#0F766E]" size={20} />} 
                 {editingKitId ? "Editar Kit" : "Montar Kit"}
               </h2>
               {editingKitId && <button onClick={cancelEditKit} className="text-gray-400"><X size={20}/></button>}
             </div>
             
-            <input placeholder="Código (Ex: KIT-01)" value={newKit.code} onChange={e => setNewKit({...newKit, code: e.target.value})} className="w-full p-4 bg-gray-50 rounded-xl md:rounded-2xl font-bold outline-none border-2 border-transparent focus:border-[#5D286C]" />
-            <input placeholder="Nome do Kit" value={newKit.name} onChange={e => setNewKit({...newKit, name: e.target.value})} className="w-full p-4 bg-gray-50 rounded-xl md:rounded-2xl font-bold outline-none border-2 border-transparent focus:border-[#5D286C]" />
+            <input placeholder="Código (Ex: KIT-01)" value={newKit.code} onChange={e => setNewKit({...newKit, code: e.target.value})} className="w-full p-4 bg-gray-50 rounded-xl md:rounded-2xl font-bold outline-none border-2 border-transparent focus:border-[#0F766E]" />
+            <input placeholder="Nome do Kit" value={newKit.name} onChange={e => setNewKit({...newKit, name: e.target.value})} className="w-full p-4 bg-gray-50 rounded-xl md:rounded-2xl font-bold outline-none border-2 border-transparent focus:border-[#0F766E]" />
             
             <div className="border-t border-gray-50 pt-4 space-y-3">
               <label className="text-[10px] font-black text-gray-400 uppercase ml-2 tracking-widest">Composição do Kit</label>
@@ -206,14 +206,14 @@ export default function KitsConfigPage() {
                 <select 
                   value={currentMoldeSelection} 
                   onChange={e => setCurrentMoldeSelection(e.target.value)} 
-                  className="flex-1 p-3 md:p-4 bg-gray-50 rounded-xl md:rounded-2xl font-bold outline-none text-xs md:text-sm border-2 border-transparent focus:border-[#5D286C] appearance-none min-w-0 max-w-full"
+                  className="flex-1 p-3 md:p-4 bg-gray-50 rounded-xl md:rounded-2xl font-bold outline-none text-xs md:text-sm border-2 border-transparent focus:border-[#0F766E] appearance-none min-w-0 max-w-full"
                 >
                   <option value="">Selecione a Peça...</option>
                   {moldes.map(m => <option key={m.id} value={m.id}>{m.nome}</option>)}
                 </select>
                 <button 
                   onClick={handleAddMoldeToKit} 
-                  className="bg-[#5D286C] text-white p-3 md:p-4 rounded-xl md:rounded-2xl shadow-lg hover:scale-105 transition-transform shrink-0 flex items-center justify-center"
+                  className="bg-[#0F766E] text-white p-3 md:p-4 rounded-xl md:rounded-2xl shadow-lg hover:scale-105 transition-transform shrink-0 flex items-center justify-center"
                 >
                   <Plus size={20} className="md:hidden"/><Plus size={24} className="hidden md:block"/>
                 </button>
@@ -221,8 +221,8 @@ export default function KitsConfigPage() {
 
               <div className="space-y-2 mt-2">
                 {selectedMoldes.map(sm => (
-                  <div key={sm.id} className="flex items-center justify-between bg-purple-50 p-3 rounded-xl">
-                    <span className="font-bold text-[11px] md:text-sm text-[#5D286C] truncate mr-2">{moldes.find(m => m.id === sm.id)?.nome}</span>
+                  <div key={sm.id} className="flex items-center justify-between bg-teal-50 p-3 rounded-xl">
+                    <span className="font-bold text-[11px] md:text-sm text-[#0F766E] truncate mr-2">{moldes.find(m => m.id === sm.id)?.nome}</span>
                     <div className="flex items-center gap-2 shrink-0">
                       <input type="number" min="1" value={sm.qty} onChange={e => {
                         const newItems = [...selectedMoldes];
@@ -235,19 +235,19 @@ export default function KitsConfigPage() {
                 ))}
               </div>
             </div>
-            <button onClick={handleSaveKit} className={`w-full text-white p-4 md:p-5 rounded-2xl md:rounded-3xl font-black text-sm md:text-base shadow-lg transition-all ${editingKitId ? 'bg-blue-600' : 'bg-[#5D286C]'}`}>
+            <button onClick={handleSaveKit} className={`w-full text-white p-4 md:p-5 rounded-2xl md:rounded-3xl font-black text-sm md:text-base shadow-lg transition-all ${editingKitId ? 'bg-blue-600' : 'bg-[#0F766E]'}`}>
               {editingKitId ? "ATUALIZAR KIT" : "SALVAR NOVO KIT"}
             </button>
           </div>
 
           <div className="space-y-4">
-            <h2 className="text-lg md:text-xl font-black flex items-center gap-2 px-2 text-[#262626]"><Package className="text-[#5D286C]" size={20}/> Kits Ativos</h2>
+            <h2 className="text-lg md:text-xl font-black flex items-center gap-2 px-2 text-[#262626]"><Package className="text-[#0F766E]" size={20}/> Kits Ativos</h2>
             <div className="space-y-3">
               {kits.map(k => (
                 <div key={k.id} className="bg-white p-3 md:p-4 lg:p-5 rounded-xl md:rounded-2xl lg:rounded-[2rem] border border-gray-100 shadow-sm group">
                   <div className="flex justify-between items-start gap-2">
                     <div className="flex-1 min-w-0">
-                        <p className="font-black text-[#5D286C] text-xs md:text-sm tracking-tight break-words">{k.codigo_unico}</p>
+                        <p className="font-black text-[#0F766E] text-xs md:text-sm tracking-tight break-words">{k.codigo_unico}</p>
                         <p className="font-bold text-[#262626] text-sm md:text-base leading-tight mt-0.5 break-words">{k.nome_kit}</p>
                     </div>
                     <div className="flex gap-1 md:opacity-0 group-hover:opacity-100 transition-all shrink-0">

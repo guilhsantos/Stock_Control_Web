@@ -159,7 +159,7 @@ export default function MaterialConfigPage() {
           onClick={() => setActiveTab('entry')}
           className={`px-3 py-2 rounded-2xl transition-all ${
             activeTab === 'entry'
-              ? "bg-white text-[#5D286C] shadow-sm"
+              ? "bg-white text-[#0F766E] shadow-sm"
               : "text-gray-400"
           }`}
         >
@@ -169,7 +169,7 @@ export default function MaterialConfigPage() {
           onClick={() => setActiveTab('types')}
           className={`px-3 py-2 rounded-2xl transition-all ${
             activeTab === 'types'
-              ? "bg-white text-[#5D286C] shadow-sm"
+              ? "bg-white text-[#0F766E] shadow-sm"
               : "text-gray-400"
           }`}
         >
@@ -181,7 +181,7 @@ export default function MaterialConfigPage() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10 animate-in fade-in duration-500 w-full">
           {/* Formulário de Entrada */}
           <form onSubmit={handleSaveEntry} className="bg-white p-4 md:p-8 rounded-xl md:rounded-[2.5rem] border-2 border-gray-50 shadow-sm space-y-6 h-fit overflow-hidden w-full">
-            <h2 className="text-xl md:text-2xl font-black flex items-center gap-3"><Plus className="text-[#5D286C]" /> Entrada de Material</h2>
+            <h2 className="text-xl md:text-2xl font-black flex items-center gap-3"><Plus className="text-[#0F766E]" /> Entrada de Material</h2>
             
             <div className="space-y-2">
               <label className="text-xs font-black text-gray-400 uppercase ml-2">Material</label>
@@ -189,7 +189,7 @@ export default function MaterialConfigPage() {
                 required
                 value={selectedMatId} 
                 onChange={e => setSelectedMatId(e.target.value)}
-                className="w-full p-3 md:p-4 bg-gray-50 rounded-xl md:rounded-2xl font-bold outline-none border-2 border-transparent focus:border-[#5D286C] appearance-none text-sm md:text-base box-border"
+                className="w-full p-3 md:p-4 bg-gray-50 rounded-xl md:rounded-2xl font-bold outline-none border-2 border-transparent focus:border-[#0F766E] appearance-none text-sm md:text-base box-border"
               >
                 <option value="">Selecione o material...</option>
                 {materials.map(m => <option key={m.id} value={m.id}>{m.nome}</option>)}
@@ -205,7 +205,7 @@ export default function MaterialConfigPage() {
                   step="0.01"
                   value={addQty} 
                   onChange={e => setAddQty(e.target.value)} 
-                  className="w-full p-3 md:p-4 bg-gray-50 rounded-xl md:rounded-2xl font-bold outline-none border-2 border-transparent focus:border-[#5D286C] text-sm md:text-base box-border" 
+                  className="w-full p-3 md:p-4 bg-gray-50 rounded-xl md:rounded-2xl font-bold outline-none border-2 border-transparent focus:border-[#0F766E] text-sm md:text-base box-border" 
                   placeholder="0.00" 
                 />
               </div>
@@ -217,7 +217,7 @@ export default function MaterialConfigPage() {
                   lang="pt-BR"
                   value={arrivalDate} 
                   onChange={e => setArrivalDate(e.target.value)} 
-                  className="w-full p-3 md:p-4 bg-gray-50 rounded-xl md:rounded-2xl font-bold outline-none border-2 border-transparent focus:border-[#5D286C] text-sm md:text-base box-border max-w-full" 
+                  className="w-full p-3 md:p-4 bg-gray-50 rounded-xl md:rounded-2xl font-bold outline-none border-2 border-transparent focus:border-[#0F766E] text-sm md:text-base box-border max-w-full" 
                   style={{ width: '100%', maxWidth: '100%' }}
                 />
               </div>
@@ -226,7 +226,7 @@ export default function MaterialConfigPage() {
             <button 
               disabled={isSubmitting} 
               type="submit" 
-              className="w-full bg-[#5D286C] text-white p-5 rounded-3xl font-black flex items-center justify-center gap-3 shadow-lg"
+              className="w-full bg-[#0F766E] text-white p-5 rounded-3xl font-black flex items-center justify-center gap-3 shadow-lg"
             >
               {isSubmitting ? <Loader2 className="animate-spin"/> : <><Save size={20} /> SALVAR ENTRADA</>}
             </button>
@@ -234,12 +234,12 @@ export default function MaterialConfigPage() {
 
           {/* Listagem de Estoque */}
           <div className="space-y-4">
-            <h2 className="text-2xl font-black flex items-center gap-3"><Package className="text-[#5D286C]" /> Estoque</h2>
+            <h2 className="text-2xl font-black flex items-center gap-3"><Package className="text-[#0F766E]" /> Estoque</h2>
             <div className="space-y-3">
               {materials.map(m => (
                 <div key={m.id} className="bg-white p-5 rounded-3xl border border-gray-100 shadow-sm">
                   <p className="font-black text-[#262626]">{m.nome}</p>
-                  <p className="text-2xl font-black text-[#5D286C] mt-2">
+                  <p className="text-2xl font-black text-[#0F766E] mt-2">
                     {parseFloat(m.estoque_kg || 0).toFixed(2)} <span className="text-sm font-bold">KG</span>
                   </p>
                 </div>
@@ -253,24 +253,24 @@ export default function MaterialConfigPage() {
       ) : (
         <div className="grid md:grid-cols-2 gap-6 animate-in fade-in duration-500">
           <form onSubmit={handleCreateMaterial} className="bg-white p-8 rounded-[2.5rem] border-2 border-gray-50 shadow-sm space-y-6 h-fit">
-            <h2 className="text-2xl font-black flex items-center gap-3"><Database className="text-[#5D286C]" /> Novo Tipo</h2>
+            <h2 className="text-2xl font-black flex items-center gap-3"><Database className="text-[#0F766E]" /> Novo Tipo</h2>
             <div className="space-y-2">
               <label className="text-xs font-black text-gray-400 uppercase ml-2">Nome do Material</label>
               <input 
                 required 
                 value={newMatName} 
                 onChange={e => setNewMatName(e.target.value)}
-                className="w-full p-4 bg-gray-50 rounded-2xl font-bold outline-none border-2 border-transparent focus:border-[#5D286C]" 
+                className="w-full p-4 bg-gray-50 rounded-2xl font-bold outline-none border-2 border-transparent focus:border-[#0F766E]" 
                 placeholder="Ex: PP Azul Royal"
               />
             </div>
-            <button type="submit" className="w-full bg-[#5D286C] text-white p-5 rounded-3xl font-black flex items-center justify-center gap-3 shadow-lg">
+            <button type="submit" className="w-full bg-[#0F766E] text-white p-5 rounded-3xl font-black flex items-center justify-center gap-3 shadow-lg">
               <Save size={20} /> CADASTRAR
             </button>
           </form>
 
           <div className="space-y-4">
-            <h2 className="text-2xl font-black flex items-center gap-3"><Database className="text-[#5D286C]" /> Tipos Cadastrados</h2>
+            <h2 className="text-2xl font-black flex items-center gap-3"><Database className="text-[#0F766E]" /> Tipos Cadastrados</h2>
             <div className="space-y-3">
               {materials.map(m => (
                 <div key={m.id} className="bg-white p-4 rounded-2xl border border-gray-100 shadow-sm">
@@ -280,7 +280,7 @@ export default function MaterialConfigPage() {
                         type="text"
                         value={editingName}
                         onChange={e => setEditingName(e.target.value)}
-                        className="flex-1 p-2 bg-gray-50 rounded-xl font-bold outline-none border-2 border-[#5D286C] text-sm"
+                        className="flex-1 p-2 bg-gray-50 rounded-xl font-bold outline-none border-2 border-[#0F766E] text-sm"
                         autoFocus
                       />
                       <button
@@ -307,7 +307,7 @@ export default function MaterialConfigPage() {
                       <div className="flex items-center gap-2 ml-3">
                         <button
                           onClick={() => handleStartEdit(m)}
-                          className="p-2 text-[#5D286C] hover:bg-purple-50 rounded-xl transition-colors"
+                          className="p-2 text-[#0F766E] hover:bg-teal-50 rounded-xl transition-colors"
                           title="Editar"
                         >
                           <Edit size={18} />

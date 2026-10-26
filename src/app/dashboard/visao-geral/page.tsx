@@ -216,7 +216,7 @@ export default function VisaoGeralPage() {
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-white">
-        <Loader2 className="animate-spin text-[#5D286C]" size={48} />
+        <Loader2 className="animate-spin text-[#0F766E]" size={48} />
       </div>
     );
   }
@@ -240,7 +240,7 @@ export default function VisaoGeralPage() {
               value={startDate}
               onChange={(e) => setStartDate(e.target.value)}
               max={endDate}
-              className="px-3 py-2 rounded-2xl border-2 border-gray-100 focus:border-[#5D286C] outline-none font-bold text-sm bg-white"
+              className="px-3 py-2 rounded-2xl border-2 border-gray-100 focus:border-[#0F766E] outline-none font-bold text-sm bg-white"
             />
           </div>
           <div className="flex items-center gap-2">
@@ -253,12 +253,12 @@ export default function VisaoGeralPage() {
               onChange={(e) => setEndDate(e.target.value)}
               min={startDate}
               max={todayYmdBr()}
-              className="px-3 py-2 rounded-2xl border-2 border-gray-100 focus:border-[#5D286C] outline-none font-bold text-sm bg-white"
+              className="px-3 py-2 rounded-2xl border-2 border-gray-100 focus:border-[#0F766E] outline-none font-bold text-sm bg-white"
             />
           </div>
           <button
             onClick={fetchData}
-            className="px-4 py-3 bg-[#5D286C] text-white rounded-2xl text-xs font-black hover:bg-[#7B1470] transition-colors flex items-center justify-center gap-2"
+            className="px-4 py-3 bg-[#0F766E] text-white rounded-2xl text-xs font-black hover:bg-[#0E7490] transition-colors flex items-center justify-center gap-2"
           >
             <Activity size={16} /> FILTRAR
           </button>
@@ -269,7 +269,7 @@ export default function VisaoGeralPage() {
         <StatCard title="Total Pedidos" value={stats.totalOrders} icon={<ShoppingCart />} color="text-blue-600" />
         <StatCard title="Entregues" value={stats.deliveredOrders} icon={<CheckCircle2 />} color="text-green-600" />
         <StatCard title="Concluídos" value={stats.completedOrders} icon={<CheckCircle2 />} color="text-emerald-600" />
-        <StatCard title="Pendentes" value={stats.pendingOrders} icon={<Clock />} color="text-purple-600" />
+        <StatCard title="Pendentes" value={stats.pendingOrders} icon={<Clock />} color="text-teal-600" />
       </div>
 
       <MachinesPanel machines={machines} production={production} defects={defects} materials={materials} />
@@ -315,7 +315,7 @@ export default function VisaoGeralPage() {
                   />
                   <YAxis axisLine={false} tickLine={false} allowDecimals={false} />
                   <Tooltip
-                    cursor={{ fill: "#f8f4ff" }}
+                    cursor={{ fill: "#F0FDFA" }}
                     contentStyle={{
                       borderRadius: "20px",
                       border: "none",
@@ -404,7 +404,7 @@ export default function VisaoGeralPage() {
                   <span>#{order.id}</span>
                   <Link
                     href={`/orders/${order.id}?returnStatus=Pendente`}
-                    className="flex items-center gap-1 text-[#5D286C] hover:underline"
+                    className="flex items-center gap-1 text-[#0F766E] hover:underline"
                   >
                     Detalhes <ArrowRight size={12} />
                   </Link>

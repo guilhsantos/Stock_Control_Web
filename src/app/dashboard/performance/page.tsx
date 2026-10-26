@@ -490,7 +490,7 @@ export default function PerformancePage() {
           type="button"
           onClick={handleFiltrar}
           disabled={loading}
-          className="bg-white border-2 border-gray-100 p-4 rounded-2xl font-black text-xs hover:border-[#5D286C] transition-all flex items-center gap-2 disabled:opacity-50"
+          className="bg-white border-2 border-gray-100 p-4 rounded-2xl font-black text-xs hover:border-[#0F766E] transition-all flex items-center gap-2 disabled:opacity-50"
         >
           <Activity size={16} /> ATUALIZAR
         </button>
@@ -506,7 +506,7 @@ export default function PerformancePage() {
               void runFetch({ rangeStart: draftStart, rangeEnd: draftEnd, mode: "molde", rowFilter: draftRowFilter, machineId: draftMachineId, orderStatus: draftOrderStatus });
             }}
             className={`px-4 py-2 rounded-2xl transition-all flex items-center gap-2 ${
-              tableMode === "molde" ? "bg-white text-[#5D286C] shadow-sm" : "text-gray-400"
+              tableMode === "molde" ? "bg-white text-[#0F766E] shadow-sm" : "text-gray-400"
             }`}
           >
             <Cpu size={16} /> Molde
@@ -518,7 +518,7 @@ export default function PerformancePage() {
               void runFetch({ rangeStart: draftStart, rangeEnd: draftEnd, mode: "kit", rowFilter: draftRowFilter, machineId: draftMachineId, orderStatus: draftOrderStatus });
             }}
             className={`px-4 py-2 rounded-2xl transition-all flex items-center gap-2 ${
-              tableMode === "kit" ? "bg-white text-[#5D286C] shadow-sm" : "text-gray-400"
+              tableMode === "kit" ? "bg-white text-[#0F766E] shadow-sm" : "text-gray-400"
             }`}
           >
             <Package size={16} /> Kit
@@ -531,7 +531,7 @@ export default function PerformancePage() {
               void runFetch({ rangeStart: draftStart, rangeEnd: draftEnd, mode: "pedidos", rowFilter: draftRowFilter, machineId: draftMachineId, orderStatus: "Todos" });
             }}
             className={`px-4 py-2 rounded-2xl transition-all flex items-center gap-2 ${
-              tableMode === "pedidos" ? "bg-white text-[#5D286C] shadow-sm" : "text-gray-400"
+              tableMode === "pedidos" ? "bg-white text-[#0F766E] shadow-sm" : "text-gray-400"
             }`}
           >
             <ShoppingCart size={16} /> Pedidos
@@ -549,7 +549,7 @@ export default function PerformancePage() {
                 value={draftStart}
                 onChange={(e) => setDraftStart(e.target.value)}
                 max={draftEnd}
-                className="px-3 py-2 rounded-2xl border-2 border-gray-100 focus:border-[#5D286C] outline-none font-bold text-sm"
+                className="px-3 py-2 rounded-2xl border-2 border-gray-100 focus:border-[#0F766E] outline-none font-bold text-sm"
               />
             </div>
             <div className="flex items-center gap-2">
@@ -561,7 +561,7 @@ export default function PerformancePage() {
                 onChange={(e) => setDraftEnd(e.target.value)}
                 min={draftStart}
                 max={todayYmdBr()}
-                className="px-3 py-2 rounded-2xl border-2 border-gray-100 focus:border-[#5D286C] outline-none font-bold text-sm"
+                className="px-3 py-2 rounded-2xl border-2 border-gray-100 focus:border-[#0F766E] outline-none font-bold text-sm"
               />
             </div>
           </div>
@@ -622,7 +622,7 @@ export default function PerformancePage() {
               type="button"
               onClick={handleFiltrar}
               disabled={loading || (tableMode === "molde" && draftRowFilter === "prod_maquina" && !draftMachineId)}
-              className="px-4 py-2 bg-[#5D286C] text-white rounded-2xl text-xs font-black hover:bg-[#7B1470] transition-colors disabled:opacity-50"
+              className="px-4 py-2 bg-[#0F766E] text-white rounded-2xl text-xs font-black hover:bg-[#0E7490] transition-colors disabled:opacity-50"
             >
               {loading ? <Loader2 className="animate-spin inline" size={16} /> : "FILTRAR"}
             </button>
@@ -649,18 +649,18 @@ export default function PerformancePage() {
         </div>
       ) : tableMode === "kit" ? (
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-          <MiniCard title="Total kits produzidos" value={cards.totalKits} icon={<Package className="text-[#5D286C]" />} />
+          <MiniCard title="Total kits produzidos" value={cards.totalKits} icon={<Package className="text-[#0F766E]" />} />
           <MiniCard title="Média material / kit (kg)" value={cards.mediaMaterialKit.toFixed(2)} />
           <MiniCard title="Média kits / dia" value={cards.mediaKitsDia.toFixed(2)} />
         </div>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-          <MiniCard title="Total pedidos" value={cards.totalPedidos} icon={<ShoppingCart className="text-[#5D286C]" />} />
-          <MiniCard title="Total kits nos pedidos" value={cards.totalKitsPedidos} icon={<Package className="text-[#5D286C]" />} />
+          <MiniCard title="Total pedidos" value={cards.totalPedidos} icon={<ShoppingCart className="text-[#0F766E]" />} />
+          <MiniCard title="Total kits nos pedidos" value={cards.totalKitsPedidos} icon={<Package className="text-[#0F766E]" />} />
           {/* Card do kit mais produzido — clicável */}
           <div
             className={`bg-white p-6 rounded-[2rem] shadow-sm border-2 flex items-center gap-4 transition-all ${
-              topKit ? "border-[#5D286C] cursor-pointer hover:shadow-md" : "border-gray-100"
+              topKit ? "border-[#0F766E] cursor-pointer hover:shadow-md" : "border-gray-100"
             }`}
             onClick={() => topKit && setKitRankOpen(true)}
             title={topKit ? "Clique para ver o ranking completo" : ""}
@@ -673,7 +673,7 @@ export default function PerformancePage() {
               {topKit ? (
                 <>
                   <p className="text-base font-black text-[#262626] truncate">{topKit.nome}</p>
-                  <p className="text-xs font-bold text-[#5D286C]">{topKit.total} unidades · Ver ranking →</p>
+                  <p className="text-xs font-bold text-[#0F766E]">{topKit.total} unidades · Ver ranking →</p>
                 </>
               ) : (
                 <p className="text-xl font-black text-gray-300">—</p>
@@ -694,7 +694,7 @@ export default function PerformancePage() {
         <div className="bg-white p-6 rounded-[2.5rem] shadow-sm border border-gray-100 overflow-hidden min-h-[200px] relative">
           {loading && (
             <div className="absolute inset-0 bg-white/70 flex items-center justify-center z-20 rounded-[2.5rem]">
-              <Loader2 className="animate-spin text-[#5D286C]" size={40} />
+              <Loader2 className="animate-spin text-[#0F766E]" size={40} />
             </div>
           )}
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-4">
@@ -704,7 +704,7 @@ export default function PerformancePage() {
             <button
               type="button"
               onClick={() => setSortDesc((v) => !v)}
-              className="flex items-center gap-2 text-xs font-black text-[#5D286C] uppercase bg-purple-50 px-4 py-2 rounded-2xl hover:bg-purple-100"
+              className="flex items-center gap-2 text-xs font-black text-[#0F766E] uppercase bg-teal-50 px-4 py-2 rounded-2xl hover:bg-teal-100"
             >
               Data {sortDesc ? <ArrowDown size={16} /> : <ArrowUp size={16} />}
             </button>
@@ -760,7 +760,7 @@ export default function PerformancePage() {
         <div className="bg-white p-6 rounded-[2.5rem] shadow-sm border border-gray-100 overflow-hidden min-h-[200px] relative">
           {loading && (
             <div className="absolute inset-0 bg-white/70 flex items-center justify-center z-20 rounded-[2.5rem]">
-              <Loader2 className="animate-spin text-[#5D286C]" size={40} />
+              <Loader2 className="animate-spin text-[#0F766E]" size={40} />
             </div>
           )}
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-4">
@@ -768,7 +768,7 @@ export default function PerformancePage() {
             <button
               type="button"
               onClick={() => setSortDesc((v) => !v)}
-              className="flex items-center gap-2 text-xs font-black text-[#5D286C] uppercase bg-purple-50 px-4 py-2 rounded-2xl hover:bg-purple-100"
+              className="flex items-center gap-2 text-xs font-black text-[#0F766E] uppercase bg-teal-50 px-4 py-2 rounded-2xl hover:bg-teal-100"
             >
               Data {sortDesc ? <ArrowDown size={16} /> : <ArrowUp size={16} />}
             </button>
@@ -818,11 +818,11 @@ export default function PerformancePage() {
                     {expandedOrderId === row.id && (
                       <tr key={`${row.id}-expand`}>
                         <td colSpan={9} className="px-4 pb-4 bg-white/60">
-                          <div className="rounded-2xl border border-purple-100 p-4 space-y-2">
+                          <div className="rounded-2xl border border-teal-100 p-4 space-y-2">
                             {row.order_items.map((item) => (
                               <div key={item.kit_id} className="flex justify-between text-sm font-bold">
                                 <span className="text-[#262626]">{item.nome}</span>
-                                <span className="text-[#5D286C]">{item.quantidade} un.</span>
+                                <span className="text-[#0F766E]">{item.quantidade} un.</span>
                               </div>
                             ))}
                             {row.order_items.length === 0 && (
@@ -878,7 +878,7 @@ export default function PerformancePage() {
                     {i + 1}
                   </span>
                   <span className="flex-1 font-bold text-[#262626] text-sm truncate">{item.nome}</span>
-                  <span className="font-black text-[#5D286C] text-sm shrink-0">{item.total} un.</span>
+                  <span className="font-black text-[#0F766E] text-sm shrink-0">{item.total} un.</span>
                 </div>
               ))}
               {kitRanking.length === 0 && (
@@ -895,7 +895,7 @@ export default function PerformancePage() {
 function MiniCard({ title, value, icon }: { title: string; value: string | number; icon?: ReactNode }) {
   return (
     <div className="bg-white p-6 rounded-[2rem] shadow-sm border border-gray-100 flex items-center gap-4">
-      {icon && <div className="p-3 bg-purple-50 rounded-xl shrink-0">{icon}</div>}
+      {icon && <div className="p-3 bg-teal-50 rounded-xl shrink-0">{icon}</div>}
       <div>
         <p className="text-gray-400 text-[10px] font-black uppercase tracking-widest">{title}</p>
         <p className="text-2xl font-black text-[#262626]">{value}</p>

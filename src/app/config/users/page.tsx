@@ -149,18 +149,18 @@ export default function UsersConfigPage() {
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
         <div>
           <h1 className="text-3xl font-black text-[#262626] flex items-center gap-3">
-            <Users className="text-[#5D286C]" /> Gestão de Usuários
+            <Users className="text-[#0F766E]" /> Gestão de Usuários
           </h1>
           <p className="text-gray-400 font-bold text-sm mt-1">Controle de acessos industrial.</p>
         </div>
         <div className="flex gap-2 w-full md:w-auto">
           <button 
             onClick={() => setIsCreateModalOpen(true)} 
-            className="flex-1 md:flex-none bg-[#5D286C] text-white px-6 py-4 rounded-2xl font-black flex items-center justify-center gap-2 shadow-lg transition-transform active:scale-95"
+            className="flex-1 md:flex-none bg-[#0F766E] text-white px-6 py-4 rounded-2xl font-black flex items-center justify-center gap-2 shadow-lg transition-transform active:scale-95"
           >
             <UserPlus size={20} /> NOVO USUÁRIO
           </button>
-          <button onClick={fetchUsers} className="p-4 bg-white border-2 border-gray-50 rounded-2xl text-gray-400 hover:text-[#5D286C]">
+          <button onClick={fetchUsers} className="p-4 bg-white border-2 border-gray-50 rounded-2xl text-gray-400 hover:text-[#0F766E]">
             <RefreshCw size={20} className={loading ? "animate-spin" : ""} />
           </button>
         </div>
@@ -170,13 +170,13 @@ export default function UsersConfigPage() {
       <div className="grid gap-4">
         {loading ? (
           <div className="flex flex-col items-center justify-center py-20 bg-white rounded-[2.5rem] border-2 border-gray-50 shadow-sm">
-            <Loader2 className="animate-spin text-[#5D286C] mb-4" size={40} />
+            <Loader2 className="animate-spin text-[#0F766E] mb-4" size={40} />
             <p className="text-gray-400 font-black uppercase text-xs tracking-widest">Sincronizando Banco...</p>
           </div>
         ) : filteredUsers.map(user => (
           <div key={user.id} className="bg-white p-6 rounded-[2rem] border border-gray-100 shadow-sm flex flex-col md:flex-row items-center justify-between gap-4 transition-all hover:shadow-md">
             <div className="flex items-center gap-4 w-full md:w-auto">
-              <div className="bg-purple-50 text-[#5D286C] w-14 h-14 rounded-2xl flex items-center justify-center font-black text-xl shrink-0">
+              <div className="bg-teal-50 text-[#0F766E] w-14 h-14 rounded-2xl flex items-center justify-center font-black text-xl shrink-0">
                 {(user.full_name || user.email)?.[0].toUpperCase()}
               </div>
               <div className="min-w-0">
@@ -186,7 +186,7 @@ export default function UsersConfigPage() {
             </div>
             <div className="flex items-center gap-2 w-full md:w-auto shrink-0">
               <div className="flex items-center gap-2 bg-gray-50 px-4 py-2 rounded-xl border border-gray-100 flex-1 md:flex-none justify-center">
-                <Shield size={16} className="text-[#5D286C]" />
+                <Shield size={16} className="text-[#0F766E]" />
                 <span className={`text-[10px] font-black uppercase ${user.role === 'PENDENTE' ? 'text-amber-600' : 'text-gray-500'}`}>
                   {ROLE_LABEL[user.role] ?? 'Operador'}
                 </span>
@@ -213,17 +213,17 @@ export default function UsersConfigPage() {
         <div className="fixed inset-0 z-[110] bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 animate-in fade-in duration-200">
           <div className="bg-white w-full max-w-md p-8 rounded-[2.5rem] shadow-2xl relative animate-in zoom-in-95 duration-200">
             <button onClick={() => setIsCreateModalOpen(false)} className="absolute top-6 right-6 text-gray-400 hover:text-gray-600"><X size={24} /></button>
-            <h2 className="text-2xl font-black text-[#262626] mb-6 flex items-center gap-2"><UserPlus className="text-[#5D286C]" /> Criar Login</h2>
+            <h2 className="text-2xl font-black text-[#262626] mb-6 flex items-center gap-2"><UserPlus className="text-[#0F766E]" /> Criar Login</h2>
             <form onSubmit={handleCreateUser} className="space-y-4">
-              <input required type="text" placeholder="Nome Completo" value={newUser.full_name} onChange={e => setNewUser({...newUser, full_name: e.target.value})} className="w-full p-4 bg-gray-50 border-2 border-transparent rounded-2xl font-bold outline-none focus:border-[#5D286C]" />
-              <input required type="email" placeholder="E-mail profissional" value={newUser.email} onChange={e => setNewUser({...newUser, email: e.target.value})} className="w-full p-4 bg-gray-50 border-2 border-transparent rounded-2xl font-bold outline-none focus:border-[#5D286C]" />
-              <input required type="password" placeholder="Senha de acesso" value={newUser.password} onChange={e => setNewUser({...newUser, password: e.target.value})} className="w-full p-4 bg-gray-50 border-2 border-transparent rounded-2xl font-bold outline-none focus:border-[#5D286C]" />
-              <select value={newUser.role} onChange={e => setNewUser({...newUser, role: e.target.value})} className="w-full p-4 bg-gray-50 border-2 border-transparent rounded-2xl font-bold outline-none focus:border-[#5D286C]">
+              <input required type="text" placeholder="Nome Completo" value={newUser.full_name} onChange={e => setNewUser({...newUser, full_name: e.target.value})} className="w-full p-4 bg-gray-50 border-2 border-transparent rounded-2xl font-bold outline-none focus:border-[#0F766E]" />
+              <input required type="email" placeholder="E-mail profissional" value={newUser.email} onChange={e => setNewUser({...newUser, email: e.target.value})} className="w-full p-4 bg-gray-50 border-2 border-transparent rounded-2xl font-bold outline-none focus:border-[#0F766E]" />
+              <input required type="password" placeholder="Senha de acesso" value={newUser.password} onChange={e => setNewUser({...newUser, password: e.target.value})} className="w-full p-4 bg-gray-50 border-2 border-transparent rounded-2xl font-bold outline-none focus:border-[#0F766E]" />
+              <select value={newUser.role} onChange={e => setNewUser({...newUser, role: e.target.value})} className="w-full p-4 bg-gray-50 border-2 border-transparent rounded-2xl font-bold outline-none focus:border-[#0F766E]">
                 <option value="OP_ESTOQUE">Operador de Estoque</option>
                 <option value="OP_PRODUCAO">Operador de Produção</option>
                 <option value="ADMIN">Administrador</option>
               </select>
-              <button disabled={isSubmitting} type="submit" className="w-full bg-[#5D286C] text-white p-5 rounded-2xl font-black shadow-xl mt-4">
+              <button disabled={isSubmitting} type="submit" className="w-full bg-[#0F766E] text-white p-5 rounded-2xl font-black shadow-xl mt-4">
                 {isSubmitting ? <Loader2 className="animate-spin mx-auto" /> : "CRIAR ACESSO NO SISTEMA"}
               </button>
             </form>
@@ -236,16 +236,16 @@ export default function UsersConfigPage() {
         <div className="fixed inset-0 z-[110] bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 animate-in fade-in duration-200">
           <div className="bg-white w-full max-w-md p-8 rounded-[2.5rem] shadow-2xl relative animate-in zoom-in-95 duration-200">
             <button onClick={() => setIsEditModalOpen(false)} className="absolute top-6 right-6 text-gray-400 hover:text-gray-600"><X size={24} /></button>
-            <h2 className="text-2xl font-black text-[#262626] mb-6 flex items-center gap-2"><Edit2 className="text-[#5D286C]" /> Editar Perfil</h2>
+            <h2 className="text-2xl font-black text-[#262626] mb-6 flex items-center gap-2"><Edit2 className="text-[#0F766E]" /> Editar Perfil</h2>
             <form onSubmit={handleUpdateUser} className="space-y-4">
-              <input type="text" required value={editingUser?.full_name || ""} onChange={e => setEditingUser({...editingUser, full_name: e.target.value})} className="w-full p-4 bg-gray-50 border-2 border-transparent rounded-2xl font-bold outline-none focus:border-[#5D286C]" />
-              <select value={editingUser?.role || "OP_ESTOQUE"} onChange={e => setEditingUser({...editingUser, role: e.target.value})} className="w-full p-4 bg-gray-50 border-2 border-transparent rounded-2xl font-bold outline-none focus:border-[#5D286C]">
+              <input type="text" required value={editingUser?.full_name || ""} onChange={e => setEditingUser({...editingUser, full_name: e.target.value})} className="w-full p-4 bg-gray-50 border-2 border-transparent rounded-2xl font-bold outline-none focus:border-[#0F766E]" />
+              <select value={editingUser?.role || "OP_ESTOQUE"} onChange={e => setEditingUser({...editingUser, role: e.target.value})} className="w-full p-4 bg-gray-50 border-2 border-transparent rounded-2xl font-bold outline-none focus:border-[#0F766E]">
                 <option value="PENDENTE" disabled>Pendente (sem acesso)</option>
                 <option value="OP_ESTOQUE">Operador de Estoque</option>
                 <option value="OP_PRODUCAO">Operador de Produção</option>
                 <option value="ADMIN">Administrador</option>
               </select>
-              <button disabled={isSubmitting} type="submit" className="w-full bg-[#5D286C] text-white p-5 rounded-2xl font-black shadow-xl mt-4">
+              <button disabled={isSubmitting} type="submit" className="w-full bg-[#0F766E] text-white p-5 rounded-2xl font-black shadow-xl mt-4">
                 {isSubmitting ? <Loader2 className="animate-spin mx-auto" /> : "SALVAR ALTERAÇÕES"}
               </button>
             </form>

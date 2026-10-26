@@ -154,7 +154,7 @@ export default function ManualProductionPage() {
   if (loading) {
     return (
       <div className="flex flex-col items-center justify-center min-h-[400px]">
-        <Loader2 className="animate-spin text-[#5D286C]" size={40} />
+        <Loader2 className="animate-spin text-[#0F766E]" size={40} />
         <p className="mt-4 text-gray-500 font-bold uppercase tracking-widest text-xs">Carregando Dados...</p>
       </div>
     );
@@ -163,7 +163,7 @@ export default function ManualProductionPage() {
   return (
     <div className="max-w-xl mx-auto space-y-8 p-4">
       <div className="flex items-center gap-4">
-        <Link href="/operator/production" className="p-3 bg-white border border-gray-100 rounded-2xl text-gray-400 hover:text-[#5D286C] transition-all shadow-sm">
+        <Link href="/operator/production" className="p-3 bg-white border border-gray-100 rounded-2xl text-gray-400 hover:text-[#0F766E] transition-all shadow-sm">
           <ArrowLeft size={20} />
         </Link>
         <div>
@@ -181,7 +181,7 @@ export default function ManualProductionPage() {
               required
               value={selectedMachine}
               onChange={(e) => setSelectedMachine(e.target.value)}
-              className="w-full p-4 pl-12 bg-gray-50 border-2 border-transparent focus:border-[#5D286C] focus:bg-white rounded-2xl font-bold outline-none transition-all appearance-none"
+              className="w-full p-4 pl-12 bg-gray-50 border-2 border-transparent focus:border-[#0F766E] focus:bg-white rounded-2xl font-bold outline-none transition-all appearance-none"
             >
               <option value="">Selecione a máquina...</option>
               {machines.map((m) => (
@@ -204,7 +204,7 @@ export default function ManualProductionPage() {
                 </Link>
               </div>
             ) : (
-              <div className="w-full p-4 bg-purple-50 border-2 border-purple-100 rounded-2xl font-black text-[#5D286C]">
+              <div className="w-full p-4 bg-teal-50 border-2 border-teal-100 rounded-2xl font-black text-[#0F766E]">
                 {machine.moldes?.nome}
               </div>
             )}
@@ -219,7 +219,7 @@ export default function ManualProductionPage() {
               required
               value={selectedMaterial}
               onChange={(e) => setSelectedMaterial(e.target.value)}
-              className="w-full p-4 pl-12 bg-gray-50 border-2 border-transparent focus:border-[#5D286C] focus:bg-white rounded-2xl font-bold outline-none transition-all appearance-none"
+              className="w-full p-4 pl-12 bg-gray-50 border-2 border-transparent focus:border-[#0F766E] focus:bg-white rounded-2xl font-bold outline-none transition-all appearance-none"
             >
               <option value="">Selecione o material...</option>
               {materials.map((m) => (
@@ -241,7 +241,7 @@ export default function ManualProductionPage() {
               placeholder="Ex: 500"
               value={quantity}
               onChange={(e) => setQuantity(e.target.value)}
-              className="w-full p-4 pl-12 bg-gray-50 border-2 border-transparent focus:border-[#5D286C] focus:bg-white rounded-2xl font-bold outline-none transition-all"
+              className="w-full p-4 pl-12 bg-gray-50 border-2 border-transparent focus:border-[#0F766E] focus:bg-white rounded-2xl font-bold outline-none transition-all"
             />
           </div>
         </div>
@@ -256,7 +256,7 @@ export default function ManualProductionPage() {
               placeholder="Ex: 2"
               value={bagsUsed}
               onChange={(e) => setBagsUsed(e.target.value)}
-              className="w-full p-4 pl-12 bg-gray-50 border-2 border-transparent focus:border-[#5D286C] focus:bg-white rounded-2xl font-bold outline-none transition-all"
+              className="w-full p-4 pl-12 bg-gray-50 border-2 border-transparent focus:border-[#0F766E] focus:bg-white rounded-2xl font-bold outline-none transition-all"
             />
           </div>
           {selectedMaterial && bagsUsed && (
@@ -273,14 +273,14 @@ export default function ManualProductionPage() {
             onChange={(e) => setObservacao(e.target.value)}
             maxLength={500}
             placeholder="Ex: troca de material no meio do lote"
-            className="w-full p-4 bg-gray-50 border-2 border-transparent focus:border-[#5D286C] focus:bg-white rounded-2xl font-bold outline-none transition-all min-h-[100px]"
+            className="w-full p-4 bg-gray-50 border-2 border-transparent focus:border-[#0F766E] focus:bg-white rounded-2xl font-bold outline-none transition-all min-h-[100px]"
           />
         </div>
 
         <button
           type="submit"
           disabled={issubmitting || !!machineBlockReason}
-          className="w-full bg-[#5D286C] text-white p-6 rounded-3xl font-black text-xl shadow-xl hover:bg-[#7B1470] transition-all flex items-center justify-center gap-3 disabled:opacity-50"
+          className="w-full bg-[#0F766E] text-white p-6 rounded-3xl font-black text-xl shadow-xl hover:bg-[#0E7490] transition-all flex items-center justify-center gap-3 disabled:opacity-50"
         >
           {issubmitting ? <Loader2 className="animate-spin" /> : <><Save size={24} /> SALVAR PRODUÇÃO</>}
         </button>

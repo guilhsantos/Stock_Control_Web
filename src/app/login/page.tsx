@@ -68,14 +68,14 @@ export default function LoginPage() {
       </div>
 
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
-        <div className="bg-white py-10 px-6 border border-gray-100 shadow-2xl shadow-purple-100/20 rounded-[3rem] sm:px-12">
+        <div className="bg-white py-10 px-6 border border-gray-100 shadow-2xl shadow-teal-100/20 rounded-[3rem] sm:px-12">
           <form className="space-y-6" onSubmit={handleLogin}>
             <div>
               <label className="block text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1 mb-2">
                 E-mail Profissional
               </label>
               <div className="relative">
-                <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-[#5D286C]">
+                <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-[#0F766E]">
                   <Mail size={20} />
                 </div>
                 <input
@@ -83,7 +83,7 @@ export default function LoginPage() {
                   required
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="block w-full pl-12 pr-4 py-4 bg-gray-50 border-2 border-transparent rounded-2xl focus:bg-white focus:ring-4 focus:ring-purple-50 focus:border-[#5D286C] text-[#262626] font-bold transition-all outline-none"
+                  className="block w-full pl-12 pr-4 py-4 bg-gray-50 border-2 border-transparent rounded-2xl focus:bg-white focus:ring-4 focus:ring-teal-50 focus:border-[#0F766E] text-[#262626] font-bold transition-all outline-none"
                   placeholder="usuario@empresa.com.br"
                 />
               </div>
@@ -94,7 +94,7 @@ export default function LoginPage() {
                 Senha de Acesso
               </label>
               <div className="relative">
-                <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-[#5D286C]">
+                <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-[#0F766E]">
                   <Lock size={20} />
                 </div>
                 <input
@@ -102,7 +102,7 @@ export default function LoginPage() {
                   required
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="block w-full pl-12 pr-4 py-4 bg-gray-50 border-2 border-transparent rounded-2xl focus:bg-white focus:ring-4 focus:ring-purple-50 focus:border-[#5D286C] text-[#262626] font-bold transition-all outline-none"
+                  className="block w-full pl-12 pr-4 py-4 bg-gray-50 border-2 border-transparent rounded-2xl focus:bg-white focus:ring-4 focus:ring-teal-50 focus:border-[#0F766E] text-[#262626] font-bold transition-all outline-none"
                   placeholder="••••••••"
                 />
               </div>
@@ -118,7 +118,7 @@ export default function LoginPage() {
               <button
                 type="submit"
                 disabled={loading}
-                className="group relative w-full flex justify-center py-5 px-4 border border-transparent rounded-2xl shadow-xl shadow-purple-200 text-lg font-black text-white bg-[#5D286C] hover:bg-[#7B1470] focus:outline-none focus:ring-4 focus:ring-purple-100 transition-all disabled:bg-gray-300 disabled:shadow-none"
+                className="group relative w-full flex justify-center py-5 px-4 border border-transparent rounded-2xl shadow-xl shadow-teal-200 text-lg font-black text-white bg-[#0F766E] hover:bg-[#0E7490] focus:outline-none focus:ring-4 focus:ring-teal-100 transition-all disabled:bg-gray-300 disabled:shadow-none"
               >
                 {loading ? <Loader2 className="animate-spin" size={24} /> : (
                   <>

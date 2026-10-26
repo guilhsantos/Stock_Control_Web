@@ -115,12 +115,12 @@ export default function DefectsPage() {
     setValidationError(null);
   };
 
-  if (loading) return <div className="flex justify-center mt-20"><Loader2 className="animate-spin text-[#5D286C]" size={40} /></div>;
+  if (loading) return <div className="flex justify-center mt-20"><Loader2 className="animate-spin text-[#0F766E]" size={40} /></div>;
 
   return (
     <div className="max-w-xl mx-auto space-y-8 p-4">
       <div className="flex items-center gap-4">
-        <Link href="/operator/production" className="p-3 bg-white border border-gray-100 rounded-2xl text-gray-400 hover:text-[#5D286C] shadow-sm transition-all">
+        <Link href="/operator/production" className="p-3 bg-white border border-gray-100 rounded-2xl text-gray-400 hover:text-[#0F766E] shadow-sm transition-all">
           <ArrowLeft size={20} />
         </Link>
         <h1 className="text-3xl font-black text-[#262626] flex items-center gap-2">
@@ -135,7 +135,7 @@ export default function DefectsPage() {
             required
             value={formData.molde_id}
             onChange={e => setFormData({...formData, molde_id: e.target.value})}
-            className="w-full p-4 bg-gray-50 rounded-2xl font-bold outline-none border-2 border-transparent focus:border-[#5D286C] appearance-none"
+            className="w-full p-4 bg-gray-50 rounded-2xl font-bold outline-none border-2 border-transparent focus:border-[#0F766E] appearance-none"
           >
             <option value="">Selecione a peça...</option>
             {moldes.map(m => <option key={m.id} value={m.id}>{m.nome}</option>)}
@@ -152,9 +152,9 @@ export default function DefectsPage() {
                 <Loader2 className="animate-spin" size={16} /> Buscando máquina...
               </div>
             ) : lastMachine.state === "found" ? (
-              <div className="w-full p-4 bg-purple-50 border-2 border-purple-100 rounded-2xl flex items-center gap-2">
-                <Lock size={14} className="text-[#5D286C] shrink-0" />
-                <span className="font-black text-[#5D286C] truncate">{lastMachine.nome}</span>
+              <div className="w-full p-4 bg-teal-50 border-2 border-teal-100 rounded-2xl flex items-center gap-2">
+                <Lock size={14} className="text-[#0F766E] shrink-0" />
+                <span className="font-black text-[#0F766E] truncate">{lastMachine.nome}</span>
                 <span className="ml-auto text-[10px] font-bold text-gray-400 uppercase shrink-0">
                   {formatDateTime(lastMachine.at)}
                 </span>
@@ -177,7 +177,7 @@ export default function DefectsPage() {
             type="number"
             value={formData.quantity}
             onChange={e => setFormData({...formData, quantity: e.target.value})}
-            className="w-full p-4 bg-gray-50 rounded-2xl font-bold outline-none border-2 border-transparent focus:border-[#5D286C]" 
+            className="w-full p-4 bg-gray-50 rounded-2xl font-bold outline-none border-2 border-transparent focus:border-[#0F766E]" 
             placeholder="Ex: 5"
           />
         </div>
@@ -187,7 +187,7 @@ export default function DefectsPage() {
           <textarea 
             value={formData.reason}
             onChange={e => setFormData({...formData, reason: e.target.value})}
-            className="w-full p-4 bg-gray-50 rounded-2xl font-bold outline-none border-2 border-transparent focus:border-[#5D286C] min-h-[120px]" 
+            className="w-full p-4 bg-gray-50 rounded-2xl font-bold outline-none border-2 border-transparent focus:border-[#0F766E] min-h-[120px]" 
             placeholder="Descreva o que houve com a peça..."
           />
         </div>

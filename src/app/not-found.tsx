@@ -9,7 +9,7 @@ export default function NotFound() {
       </p>
       <Link 
         href="/" 
-        className="bg-[#5D286C] text-white px-10 py-5 rounded-2xl font-black hover:bg-[#7B1470] transition-all shadow-xl shadow-purple-100"
+        className="bg-[#0F766E] text-white px-10 py-5 rounded-2xl font-black hover:bg-[#0E7490] transition-all shadow-xl shadow-teal-100"
       >
         VOLTAR AO INÍCIO
       </Link>
